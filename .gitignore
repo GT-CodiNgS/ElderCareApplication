@@ -353,4 +353,9 @@ MigrationBackup/
 
 
 # DB migration statefile
-#Core/Services/**/Migrations/*.cs
+Core/Services/**/Migrations/*.cs
+*.dll
+EdlerCareApi/bin/
+*.pdb
+EdlerCareApi/obj/
+*.dll
