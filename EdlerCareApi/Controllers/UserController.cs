@@ -12,6 +12,5 @@ namespace EdlerCareApi.Controllers
         {
             return "Hello, Users Here!";
         }
-
     }
 }
