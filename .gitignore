@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/EdlerCareApi/.vs/EdlerCareApi
+/EdlerCareApi/obj/Debug/net7.0/EdlerCareApi.assets.cache
+/EdlerCareApi/obj/Debug/net7.0/EdlerCareApi.GeneratedMSBuildEditorConfig.editorconfig
