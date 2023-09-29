@@ -1,4 +1,4 @@
-﻿using EdlerCareApi.Models;
+﻿using EdlerCareApi.Models.Post;
 
 namespace EdlerCareApi.Services.Foundations.Posts
 {

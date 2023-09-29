@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EdlerCareApi.Models
+namespace EdlerCareApi.Models.Post
 {
-    [Table("Posts",Schema="public")]
+    [Table("Posts", Schema = "public")]
     public class Post : IAuditable
     {
         public Guid Id { get; set; }

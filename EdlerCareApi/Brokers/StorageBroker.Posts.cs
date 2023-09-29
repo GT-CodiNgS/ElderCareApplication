@@ -1,4 +1,4 @@
-﻿using EdlerCareApi.Models;
+﻿using EdlerCareApi.Models.Post;
 using Microsoft.EntityFrameworkCore;
 
 namespace EdlerCareApi.Brokers
@@ -9,7 +9,7 @@ namespace EdlerCareApi.Brokers
 
         public IQueryable<Post> SelectAllPosts() => this.Posts.AsQueryable();
 
-        public async ValueTask<Post> InsertPostAsync(Post post)=>
+        public async ValueTask<Post> InsertPostAsync(Post post) =>
             await InsertAsync(post);
 
         public async ValueTask<Post> SelectPostByIdAsync(Guid postId) =>

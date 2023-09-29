@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace EdlerCareApi.Brokers
 {
-    public partial class StorageBroker: DbContext, IStorageBroker
+    public partial class StorageBroker : DbContext, IStorageBroker
     {
         private readonly IConfiguration configuration;
         private IHttpContextAccessor httpContextAccessor;
