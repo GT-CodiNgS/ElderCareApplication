@@ -132,7 +132,5 @@ namespace EdlerCareApi.Brokers
                 }
             }
         }
-
-
     }
 }

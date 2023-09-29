@@ -1,5 +1,6 @@
 ﻿using EdlerCareApi.Brokers;
 using EdlerCareApi.Services.Foundations.Posts;
+using EdlerCareApi.Services.Foundations.Users;
 using Microsoft.Extensions.Options;
 
 namespace EdlerCareApi.Extensions
@@ -9,6 +10,7 @@ namespace EdlerCareApi.Extensions
         public static IServiceCollection AddConfiguredServiceDependancies(this IServiceCollection services)
         {
             services.AddTransient<IPostService, PostService>();
+            services.AddTransient<IUserService, UserService>();
 
             return services;
         }
@@ -16,7 +18,7 @@ namespace EdlerCareApi.Extensions
         public static IServiceCollection AddConfiguredBrokerDependancies(this IServiceCollection services)
         {
             services.AddTransient<IStorageBroker, StorageBroker>();
-
+            services.AddTransient<IUserService,UserService>();
             return services;
         }
 
