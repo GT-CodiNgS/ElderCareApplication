@@ -1,5 +1,6 @@
 ﻿using EdlerCareApi.Models.Post;
 using EdlerCareApi.Services.Foundations.Posts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulSense.Controllers;
 
@@ -23,7 +24,7 @@ namespace EdlerCareApi.Controllers
             return Created(addedPost);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin")]
         public ActionResult<IQueryable<Post>> GetAllPosts()
         {
             IQueryable<Post> posts = this.postService.RetriveAllActivePosts();
