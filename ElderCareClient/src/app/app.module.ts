@@ -1,33 +1,23 @@
 import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // import BrowserAnimationsModule
-
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { AppRoutingModule } from './app.routing';
-import { MainComponent } from './components/main.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './core/guards/auth.guard';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+import { AppRoutingModule } from './app.routing';
+import { Router, RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    LoginComponent,
-    SignUpComponent,
-    MainComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     MatIconModule,
     ReactiveFormsModule,
+    FormsModule,
+    RouterModule.forRoot(AppRoutingModule),
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
+  // exports: [RouterModule],
 })
 export class AppModule {}

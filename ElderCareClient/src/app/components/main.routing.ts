@@ -1,18 +1,27 @@
-import { Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { NgModule } from '@angular/core';
+import { AuthGuard } from '../core/guards/auth.guard';
+import { MainComponent } from './main.component';
 
-export const MainRoutes: Routes = [
+export const MainRoutingModule: Routes = [
   {
     path: '',
-    component: HomeComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'about',
-    component: HomeComponent,
-  },
-  {
-    path: 'contact',
-    component: HomeComponent,
+    component: MainComponent,
+
+    children: [
+      {
+        path: '',
+        component: HomeComponent,
+      },
+      {
+        path: 'about',
+        loadChildren: () =>
+          import('../components/login/login.component').then(
+            (m) => m.LoginComponent
+          ),
+      },
+    ],
   },
 ];
