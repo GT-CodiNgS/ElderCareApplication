@@ -1,18 +1,25 @@
+import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './core/guards/auth.guard';
+import { AppRoutingModule } from './app.routing';
+import { Router, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    MatIconModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule,
+    RouterModule.forRoot(AppRoutingModule),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AuthGuard],
+  bootstrap: [AppComponent],
+  // exports: [RouterModule],
 })
-export class AppModule { }
+export class AppModule {}

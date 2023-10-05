@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace EdlerCareApi.Brokers
 {
-    public partial class StorageBroker: DbContext, IStorageBroker
+    public partial class StorageBroker : DbContext, IStorageBroker
     {
         private readonly IConfiguration configuration;
         private IHttpContextAccessor httpContextAccessor;
@@ -85,9 +85,10 @@ namespace EdlerCareApi.Brokers
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             DateTimeOffset dateTime = DateTimeOffset.UtcNow;
-            string userId = this.httpContextAccessor.HttpContext?
-                .User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)
-                ?.Value;
+            //string userId = this.httpContextAccessor.HttpContext?
+            //    .User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)
+            //    ?.Value;
+            string userId = "00000000-0000-0000-0000-000000000000";
             Console.WriteLine($"Captured UserId {userId}");
             if (userId != null)
             {
@@ -132,7 +133,5 @@ namespace EdlerCareApi.Brokers
                 }
             }
         }
-
-
     }
 }

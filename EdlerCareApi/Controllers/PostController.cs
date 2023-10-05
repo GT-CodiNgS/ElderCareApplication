@@ -1,11 +1,12 @@
-﻿using EdlerCareApi.Models;
+﻿using EdlerCareApi.Models.Post;
 using EdlerCareApi.Services.Foundations.Posts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulSense.Controllers;
 
 namespace EdlerCareApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]"), Authorize]
     [ApiController]
     public class PostController : RESTFulController
     {

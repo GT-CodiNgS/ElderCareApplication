@@ -359,3 +359,4 @@ EdlerCareApi/bin/
 *.pdb
 EdlerCareApi/obj/
 *.dll
+.angular/

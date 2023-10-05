@@ -1,4 +1,4 @@
-﻿using EdlerCareApi.Models;
+﻿using EdlerCareApi.Models.Post;
 
 namespace EdlerCareApi.Brokers
 {
