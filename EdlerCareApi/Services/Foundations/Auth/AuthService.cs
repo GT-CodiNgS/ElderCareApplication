@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace EdlerCareApi.Services.Foundations.Auth
 {
@@ -72,6 +73,7 @@ namespace EdlerCareApi.Services.Foundations.Auth
                 userProfile.PasswordHash = passwordHash;
                 userProfile.PasswordSalt = passwordSalt;
                 userProfile.CreatedDate = DateTime.UtcNow;
+                userProfile.TokenCreated= DateTime.UtcNow;
 
                 UserProfile addedUserProfile = await this.userProfileService.AddUserProfileAsync(userProfile);
                 if (addedUserProfile != null)
@@ -107,33 +109,58 @@ namespace EdlerCareApi.Services.Foundations.Auth
 
         private string CreateToken(UserProfile user)
         {
-            string role = user.RoleType.ToString();
-            List<Claim> claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.Id.ToString()),
-                new Claim(ClaimTypes.Role, role)
+            List<Claim> claims = new List<Claim> {
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Role, "Admin"),
+                //new Claim(ClaimTypes.Role, "User"),
             };
 
-            var keyBytes = new byte[64];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(keyBytes);
-            }
+            //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+            //    configuration.GetSection("AppSettings:Token").Value!));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is my custom Secret key for authentication"));
 
-            var key = new SymmetricSecurityKey(keyBytes);
-
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
 
             var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddDays(2),
-                signingCredentials: creds);
+                    claims: claims,
+                    expires: DateTime.Now.AddDays(1),
+                    signingCredentials: creds
+                );
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
             return jwt;
         }
+
+        //private string CreateToken(UserProfile user)
+        //{
+        //    string role = user.RoleType.ToString();
+        //    List<Claim> claims = new List<Claim>
+        //    {
+        //        new Claim(ClaimTypes.Name, user.Id.ToString()),
+        //        new Claim(ClaimTypes.Role, role)
+        //    };
+
+        //    var keyBytes = new byte[64];
+        //    using (var rng = RandomNumberGenerator.Create())
+        //    {
+        //        rng.GetBytes(keyBytes);
+        //    }
+
+        //    var key = new SymmetricSecurityKey(keyBytes);
+
+
+        //    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+        //    var token = new JwtSecurityToken(
+        //        claims: claims,
+        //        expires: DateTime.Now.AddDays(2),
+        //        signingCredentials: creds);
+
+        //    var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+        //    return jwt;
+        //}
 
         private RefreshToken GenerateRefreshToken()
         {

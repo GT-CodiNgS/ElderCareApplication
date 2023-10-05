@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './core/guards/auth.guard';
 import { AppRoutingModule } from './app.routing';
 import { Router, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,6 +14,7 @@ import { Router, RouterModule } from '@angular/router';
     BrowserModule,
     MatIconModule,
     ReactiveFormsModule,
+    HttpClientModule,
     FormsModule,
     RouterModule.forRoot(AppRoutingModule),
   ],

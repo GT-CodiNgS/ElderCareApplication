@@ -6,7 +6,7 @@ using RESTFulSense.Controllers;
 
 namespace EdlerCareApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]"), Authorize]
     [ApiController]
     public class PostController : RESTFulController
     {
@@ -24,7 +24,7 @@ namespace EdlerCareApi.Controllers
             return Created(addedPost);
         }
 
-        [HttpGet, Authorize(Roles = "Admin")]
+        [HttpGet]
         public ActionResult<IQueryable<Post>> GetAllPosts()
         {
             IQueryable<Post> posts = this.postService.RetriveAllActivePosts();

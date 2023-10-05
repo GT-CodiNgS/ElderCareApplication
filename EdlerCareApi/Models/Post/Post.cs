@@ -7,6 +7,8 @@ namespace EdlerCareApi.Models.Post
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
+        public PostGenderType PostGenderType { get; set; }
         public string Body { get; set; }
         public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset UpdatedDate { get; set; }

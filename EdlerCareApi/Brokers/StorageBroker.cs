@@ -85,9 +85,10 @@ namespace EdlerCareApi.Brokers
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             DateTimeOffset dateTime = DateTimeOffset.UtcNow;
-            string userId = this.httpContextAccessor.HttpContext?
-                .User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)
-                ?.Value;
+            //string userId = this.httpContextAccessor.HttpContext?
+            //    .User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)
+            //    ?.Value;
+            string userId = "00000000-0000-0000-0000-000000000000";
             Console.WriteLine($"Captured UserId {userId}");
             if (userId != null)
             {

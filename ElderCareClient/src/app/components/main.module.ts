@@ -9,9 +9,10 @@ import { MainRoutingModule } from './main.routing';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { MainComponent } from './main.component';
+import { AnimationComponent } from './shared/animation/animation.component';
 
 @NgModule({
-  declarations: [MainComponent, HomeComponent, LoginComponent, SignUpComponent],
+  declarations: [MainComponent, HomeComponent, LoginComponent, SignUpComponent, AnimationComponent],
   imports: [
     NgxPaginationModule,
     ReactiveFormsModule,
