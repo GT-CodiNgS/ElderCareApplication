@@ -2,4 +2,20 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-// @import 'material-icons/iconfont/material-icons.css';
+@import 'material-icons/iconfont/material-icons.css';
+
+.model-preview {
+    .mat-mdc-dialog-container .mdc-dialog__surface {
+        border-radius: 12px;
+    }
+
+    .ql-snow.ql-disabled .ql-editor {
+        background: #fff !important;
+        border: none !important;
+        padding-top: 0;
+    }
+
+    .ql-snow.ql-disabled {
+        border: none !important;
+    }
+}

@@ -7,15 +7,19 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { AppRoutingModule } from './app.routing';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     MatIconModule,
+    MatTabsModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    MatDialogModule,
     RouterModule.forRoot(AppRoutingModule),
   ],
   providers: [AuthGuard],
