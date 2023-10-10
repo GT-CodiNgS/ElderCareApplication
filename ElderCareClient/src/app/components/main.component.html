@@ -4,11 +4,13 @@
     <ul class="flex space-x-4 pr-8">
       <li><a class="text-white">Home</a></li>
       <li>
-        <a [routerLink]="'about'" href="#" class="text-white cursor-pointer"
-          >Posts</a
+        <a [routerLink]="'about'" class="text-white cursor-pointer">Posts</a>
+      </li>
+      <li>
+        <a [routerLink]="'profile'" class="text-white cursor-pointer"
+          >Profile</a
         >
       </li>
-      <li><a class="text-white cursor-pointer">Profile</a></li>
       <li *ngIf="true" class="ml-2">
         <a
           disabled

@@ -12,6 +12,9 @@ import { MainComponent } from './main.component';
 import { AnimationComponent } from './shared/animation/animation.component';
 import { Material } from 'three';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     LoginComponent,
     SignUpComponent,
     AnimationComponent,
+    ProfileComponent,
   ],
   imports: [
     NgxPaginationModule,
@@ -27,6 +31,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatTabsModule,
     FormsModule,
     CommonModule,
+    MatInputModule,
     DatePipe,
     RouterModule.forChild(MainRoutingModule),
   ],

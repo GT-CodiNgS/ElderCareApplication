@@ -1,7 +1,7 @@
-<div class="">
+<div>
   <div class="login-modal-content">
     <div class="flex items-center justify-center bg-gray-100">
-      <div class="max-w-sm w-96 space-y-8">
+      <div class="max-w-sm w-96 space-y-4">
         <div>
           <h2 class="mt-6 text-center text-3xl font-serif text-gray-900">
             {{ isSignInForm ? "Sign In" : "Sign Up" }}
@@ -69,47 +69,62 @@
         <div>
           <form [formGroup]="signupForm" class="overflow-y-scroll">
             <ng-template #signUpForm class="overflow-y-scroll">
-              <div class="pb-1">
+              <div>
                 <label for="email" class="sr-only">First Name</label>
                 <input
-                  formControlName="email"
+                  formControlName="firstName"
                   type="text"
                   required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="First Name"
                 />
+                <mat-error
+                  *ngIf="isAdded && signupForm.controls['firstName'].errors"
+                  >First Name is required</mat-error
+                >
               </div>
-              <div class="pb-1">
+              <div>
                 <label for="email" class="sr-only">Last Name</label>
                 <input
-                  formControlName="email"
+                  formControlName="lastName"
                   type="text"
                   required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Last Name"
                 />
+                <mat-error
+                  *ngIf="isAdded && signupForm.controls['lastName'].errors"
+                  >Last Name is required</mat-error
+                >
               </div>
-              <div class="pb-1">
+              <div>
                 <label for="email" class="sr-only">User Name</label>
                 <input
-                  formControlName="email"
+                  formControlName="userName"
                   required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="User Name"
                 />
+                <mat-error
+                  *ngIf="isAdded && signupForm.controls['userName'].errors"
+                  >User Name is required</mat-error
+                >
               </div>
-              <div class="pb-1">
+              <div>
                 <label for="email" class="sr-only">Email</label>
                 <input
                   formControlName="email"
-                  type="email"
-                  autocomplete="email"
+                  type="text"
                   required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
                 />
+                <mat-error
+                  *ngIf="isAdded && signupForm.controls['email'].errors"
+                  >Email is required</mat-error
+                >
               </div>
-              <div class="pb-1">
+              <div>
                 <label for="mobile" class="sr-only">Mobile</label>
                 <input
                   formControlName="mobile"
@@ -119,42 +134,73 @@
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Mobile"
                 />
+                <mat-error
+                  *ngIf="isAdded && signupForm.controls['mobile'].errors"
+                  >Mobile is required</mat-error
+                >
               </div>
-              <div class="pb-1">
-                <label for="email" class="sr-only">Email</label>
+              <div>
+                <label for="address" class="sr-only">Address</label>
                 <input
-                  formControlName="email"
-                  type="email"
-                  autocomplete="email"
+                  formControlName="address"
+                  type="text"
                   required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Email address"
+                  placeholder="Address"
                 />
+                <mat-error
+                  *ngIf="isAdded && signupForm.controls['address'].errors"
+                  >Address is required</mat-error
+                >
               </div>
-              <div class="pb-1">
-                <label for="email" class="sr-only">Email</label>
+              <div>
+                <label for="city" class="sr-only">City</label>
                 <input
-                  formControlName="email"
-                  type="email"
-                  autocomplete="email"
+                  formControlName="city"
+                  type="text"
                   required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Email address"
+                  placeholder="City"
                 />
+                <mat-error *ngIf="isAdded && signupForm.controls['city'].errors"
+                  >City is required</mat-error
+                >
               </div>
-              <div class="pb-1">
-                <label for="email" class="sr-only">Email</label>
+              <div>
+                <label for="Password" class="sr-only">Password</label>
                 <input
-                  formControlName="email"
-                  type="email"
-                  autocomplete="email"
+                  formControlName="password"
+                  type="text"
                   required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Email address"
+                  placeholder="Password"
                 />
+                <mat-error
+                  *ngIf="isAdded && signupForm.controls['password'].errors"
+                  >Password is required</mat-error
+                >
+              </div>
+              <div>
+                <label for="confirmedPassword" class="sr-only"
+                  >Re-Password</label
+                >
+                <input
+                  formControlName="confirmedPassword"
+                  type="text"
+                  required
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Re-Password"
+                />
+                <mat-error
+                  *ngIf="
+                    isAdded && signupForm.controls['confirmedPassword'].errors
+                  "
+                  >Re-Password is required</mat-error
+                >
               </div>
               <div>
                 <button
+                  (click)="signUp()"
                   type="submit"
                   class="mb-1 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
@@ -169,7 +215,7 @@
         <div class="text-center">
           <button
             (click)="toggleForm()"
-            class="mb-0.5 text-indigo-600 hover:text-indigo-500"
+            class="text-indigo-600 hover:text-indigo-500"
           >
             {{
               isSignInForm

@@ -4,6 +4,7 @@ import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import * as jwt from 'jsonwebtoken';
+import { UserProfile } from 'src/app/core/models/UserProfile';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +12,13 @@ import * as jwt from 'jsonwebtoken';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  signupForm: FormGroup;
+  loginForm!: FormGroup;
+  signupForm!: FormGroup;
   isSignInForm: boolean = true;
   disableLoginBtn = false;
-  userData: any;
+  userData?: any;
+  isAdded = false;
+  isAddedLogin = false;
 
   ngOnInit(): void {}
 
@@ -31,9 +34,15 @@ export class LoginComponent implements OnInit {
     });
 
     this.signupForm = this.inputFormBuilder.group({
-      fullName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      userName: ['', Validators.required],
+      email: ['', [Validators.required]],
+      mobile: ['', Validators.required],
+      address: ['', Validators.required],
+      city: ['', Validators.required],
       password: ['', Validators.required],
+      confirmedPassword: ['', Validators.required],
     });
   }
 
@@ -45,12 +54,14 @@ export class LoginComponent implements OnInit {
     this.isSignInForm = !this.isSignInForm;
   }
 
-  signIn() {
+  async signIn() {
+    this.isAddedLogin = !this.loginForm.valid;
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe(
+      await this.authService.login(this.loginForm.value).subscribe(
         (response) => {
           this.disableLoginBtn = true;
           this.userData = response;
+          this.setLocalStorage(response);
           this.snackbarService.openCustomSnackBar(
             'Login Successful',
             'success',
@@ -74,5 +85,46 @@ export class LoginComponent implements OnInit {
         'warn'
       );
     }
+  }
+
+  async signUp() {
+    this.isAdded = !this.signupForm.valid;
+    if (this.signupForm.valid) {
+      await this.authService.register(this.signupForm.value).subscribe(
+        async (response) => {
+          this.disableLoginBtn = true;
+          this.userData = response;
+          this.setLocalStorage(response);
+          this.snackbarService.openCustomSnackBar(
+            'Registration Successful',
+            'success',
+            'primary'
+          );
+          this.closeDialog();
+        },
+
+        (error) => {
+          console.log(error);
+          this.snackbarService.openCustomSnackBar(
+            'Registration Failed',
+            'error',
+            'warn'
+          );
+        }
+      );
+    } else {
+      this.snackbarService.openCustomSnackBar(
+        'Please fill required fields',
+        'error',
+        'warn'
+      );
+    }
+  }
+
+  setLocalStorage(userData: any) {
+    console.log(userData.Id);
+
+    localStorage.setItem('userId', userData.Id);
+    console.log(localStorage.getItem('userId'));
   }
 }
