@@ -9,6 +9,8 @@ import { Router, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Required for animations
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +22,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     HttpClientModule,
     FormsModule,
     MatDialogModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
     RouterModule.forRoot(AppRoutingModule),
   ],
   providers: [AuthGuard],

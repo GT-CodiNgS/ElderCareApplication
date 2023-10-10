@@ -55,16 +55,16 @@ namespace EdlerCareApi.Controllers
             }
         }
 
-        [HttpPost("login")]
+        [HttpPost("login"),AllowAnonymous]
         public async ValueTask<ActionResult<string>> Login([FromBody] UserDto userProfile)
         {
             try
             {
-                string token = this.authService.LoginUserAsync(userProfile);
+                UserProfile mayBeUserProfile = this.authService.LoginUserAsync(userProfile);
                 var refreshToken = GenerateRefreshToken();
                 SetRefreshToken(refreshToken);
 
-                return Ok(token);
+                return Ok(mayBeUserProfile);
             }
             catch (Exception e)
             {

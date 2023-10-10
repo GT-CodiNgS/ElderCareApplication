@@ -3,6 +3,8 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import 'material-icons/iconfont/material-icons.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 
 .model-preview {
     .mat-mdc-dialog-container .mdc-dialog__surface {
@@ -18,4 +20,20 @@
     .ql-snow.ql-disabled {
         border: none !important;
     }
+}
+
+/* Custom Snackbar Styles */
+.custom-error {
+    background-color: #f44336;
+    /* Red */
+}
+
+.custom-success {
+    background-color: #4CAF50;
+    /* Green */
+}
+
+.mat-primary {
+    color: #2196F3;
+    /* Blue */
 }

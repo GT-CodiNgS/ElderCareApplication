@@ -5,12 +5,17 @@
       <li><a class="text-white">Home</a></li>
       <li>
         <a [routerLink]="'about'" href="#" class="text-white cursor-pointer"
-          >About</a
+          >Posts</a
         >
       </li>
-      <li><a class="text-white cursor-pointer">Services</a></li>
-      <li>
-        <a (click)="openDialog()" class="text-white cursor-pointer">Login</a>
+      <li><a class="text-white cursor-pointer">Profile</a></li>
+      <li *ngIf="true" class="ml-2">
+        <a
+          disabled
+          (click)="openDialog()"
+          class="text-black font-mono pr-3 pl-3 p-1 rounded-sm text-center cursor-pointer bg-orange-600"
+          >Login</a
+        >
       </li>
     </ul>
   </nav>

@@ -23,7 +23,7 @@ namespace EdlerCareApi.Services.Foundations.Auth
             this.configuration = configuration;
         }
 
-        public string LoginUserAsync(UserDto user)
+        public UserProfile LoginUserAsync(UserDto user)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace EdlerCareApi.Services.Foundations.Auth
 
                 string token = CreateToken(maybeUserProfile);
 
-                return token;
+                return maybeUserProfile;
             }
             catch (Exception e)
             {
