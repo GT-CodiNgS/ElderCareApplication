@@ -1,13 +1,19 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Post } from 'src/app/core/models/Post';
 import { PostService } from 'src/app/core/services/post.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss'],
 })
-export class HomeComponent {
+export class ProfileComponent {
+  user = {
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    location: 'New York, USA',
+  };
+
   itemsPerPage = 5;
   currentPage = 1;
   posts: Post[] = [];

@@ -7,7 +7,7 @@ namespace EdlerCareApi.Services.Foundations.Auth
     public interface IAuthService
     {
         ValueTask<UserProfile> RegisterUserAsync(UserProfile userProfile);
-        string LoginUserAsync(UserDto user);
+        UserProfile LoginUserAsync(UserDto user);
         ValueTask<UserDto> LogoutUserAsync(UserDto user);
         ValueTask<UserDto> RefreshTokenAsync(UserDto user);
     }

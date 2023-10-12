@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { AuthGuard } from '../core/guards/auth.guard';
 import { MainComponent } from './main.component';
+import { ProfileComponent } from '../components/profile/profile.component';
 
 export const MainRoutingModule: Routes = [
   {
@@ -13,13 +14,13 @@ export const MainRoutingModule: Routes = [
     children: [
       {
         path: '',
-        component: HomeComponent,
+        component: ProfileComponent,
       },
       {
-        path: 'about',
+        path: 'profile',
         loadChildren: () =>
-          import('../components/login/login.component').then(
-            (m) => m.LoginComponent
+          import('../components/profile/profile.component').then(
+            (m) => m.ProfileComponent
           ),
       },
     ],

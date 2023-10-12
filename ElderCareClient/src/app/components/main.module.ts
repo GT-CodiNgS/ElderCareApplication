@@ -10,14 +10,28 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { MainComponent } from './main.component';
 import { AnimationComponent } from './shared/animation/animation.component';
+import { Material } from 'three';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
-  declarations: [MainComponent, HomeComponent, LoginComponent, SignUpComponent, AnimationComponent],
+  declarations: [
+    MainComponent,
+    HomeComponent,
+    LoginComponent,
+    SignUpComponent,
+    AnimationComponent,
+    ProfileComponent,
+  ],
   imports: [
     NgxPaginationModule,
     ReactiveFormsModule,
+    MatTabsModule,
     FormsModule,
     CommonModule,
+    MatInputModule,
     DatePipe,
     RouterModule.forChild(MainRoutingModule),
   ],
