@@ -21,6 +21,9 @@ namespace ElderCare.Test.Unit.Services.Foundations.Posts
         private static DateTimeOffset GetRandomDateTime() =>
             new DateTimeRange(earliestDate: new DateTime()).GetValue();
 
+        private static Post CreateRandomPost() =>
+            CreatePostFiller(dateTime: GetRandomDateTime()).Create();
+
         private static IQueryable<Post> CreateRandomPosts() =>
             CreateRandomPosts(count: GetRandomNumber());
 
