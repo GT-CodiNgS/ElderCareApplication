@@ -1,5 +1,4 @@
 ﻿using EdlerCareApi.Dtos.User;
-using EdlerCareApi.Models.RefreshToken;
 using EdlerCareApi.Models.UserProfiles;
 
 namespace EdlerCareApi.Services.Foundations.Auth

@@ -73,7 +73,7 @@ namespace EdlerCareApi.Services.Foundations.Auth
                 userProfile.PasswordHash = passwordHash;
                 userProfile.PasswordSalt = passwordSalt;
                 userProfile.CreatedDate = DateTime.UtcNow;
-                userProfile.TokenCreated= DateTime.UtcNow;
+                userProfile.TokenCreated = DateTime.UtcNow;
 
                 UserProfile addedUserProfile = await this.userProfileService.AddUserProfileAsync(userProfile);
                 if (addedUserProfile != null)

@@ -1,6 +1,5 @@
 ﻿using EdlerCareApi.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace EdlerCareApi.Brokers
 {
