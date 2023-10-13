@@ -2,7 +2,6 @@
 using EdlerCareApi.Services.Foundations.Auth;
 using EdlerCareApi.Services.Foundations.Posts;
 using EdlerCareApi.Services.Foundations.Users;
-using Microsoft.Extensions.Options;
 
 namespace EdlerCareApi.Extensions
 {
@@ -20,7 +19,7 @@ namespace EdlerCareApi.Extensions
         public static IServiceCollection AddConfiguredBrokerDependancies(this IServiceCollection services)
         {
             services.AddTransient<IStorageBroker, StorageBroker>();
-            services.AddTransient<IUserProfileService,UserProfileService>();
+            services.AddTransient<IUserProfileService, UserProfileService>();
             return services;
         }
 

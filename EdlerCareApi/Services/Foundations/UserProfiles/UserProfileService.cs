@@ -45,7 +45,7 @@ namespace EdlerCareApi.Services.Foundations.Users
         {
             try
             {
-                UserProfile removedUser = 
+                UserProfile removedUser =
                     await this.storageBroker.SelectUserProfileByIdAsync(userProfileId);
                 if (removedUser != null)
                 {

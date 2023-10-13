@@ -30,7 +30,7 @@ namespace ElderCare.Test.Unit.Services.Foundations.Posts
         private static int GetRandomNumber() => new IntRange(min: 2, max: 10).GetValue();
 
         private static IQueryable<Post> CreateRandomPosts(int count) =>
-            CreatePostFiller(dateTime:GetRandomDateTime()).Create(count).AsQueryable();
+            CreatePostFiller(dateTime: GetRandomDateTime()).Create(count).AsQueryable();
 
         private static Filler<Post> CreatePostFiller(DateTimeOffset dateTime)
         {

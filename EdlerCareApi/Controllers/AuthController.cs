@@ -5,10 +5,7 @@ using EdlerCareApi.Services.Foundations.Auth;
 using EdlerCareApi.Services.Foundations.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using RESTFulSense.Controllers;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Security.Cryptography;
 
 namespace EdlerCareApi.Controllers
@@ -55,7 +52,7 @@ namespace EdlerCareApi.Controllers
             }
         }
 
-        [HttpPost("login"),AllowAnonymous]
+        [HttpPost("login"), AllowAnonymous]
         public async ValueTask<ActionResult<string>> Login([FromBody] UserDto userProfile)
         {
             try

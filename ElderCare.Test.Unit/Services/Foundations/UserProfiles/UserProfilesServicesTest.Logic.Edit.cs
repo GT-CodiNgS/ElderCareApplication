@@ -32,6 +32,6 @@ namespace ElderCare.Test.Unit.Services.Foundations.UserProfiles
 
             this.storageBrokerMock.VerifyNoOtherCalls();
         }
-        
+
     }
 }
