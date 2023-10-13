@@ -46,9 +46,9 @@ namespace EdlerCareApi.Controllers
         }
 
         [HttpDelete("{postId}")]
-        public async ValueTask<ActionResult<Post>> ModifyPostToRemoveAsync(Post post)
+        public async ValueTask<ActionResult<Post>> ModifyPostToRemoveAsync(Guid postId)
         {
-            Post removedPost = await this.postService.RemovePostAsync(post);
+            Post removedPost = await this.postService.RemovePostAsync(postId);
             return Ok(removedPost);
         }
     }
