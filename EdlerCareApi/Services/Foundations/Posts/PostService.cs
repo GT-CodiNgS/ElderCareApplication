@@ -40,12 +40,18 @@ namespace EdlerCareApi.Services.Foundations.Posts
             }
         }
 
-        public async ValueTask<Post> RemovePostAsync(Post post)
+        public async ValueTask<Post> RemovePostAsync(Guid postId)
         {
             try
             {
-                return await this.storageBroker.UpdatePostAsync(post);
+                Post removedPost = await this.storageBroker.SelectPostByIdAsync(postId);
 
+                if (removedPost != null)
+                {
+                    removedPost.IsDeleted = true;
+                }
+
+                return await this.storageBroker.UpdatePostAsync(removedPost);
             }
             catch (Exception)
             {
@@ -58,7 +64,7 @@ namespace EdlerCareApi.Services.Foundations.Posts
         {
             try
             {
-                return await this.storageBroker.SelectPostByIdAsync(postId);    
+                return await this.storageBroker.SelectPostByIdAsync(postId);
             }
             catch (Exception)
             {

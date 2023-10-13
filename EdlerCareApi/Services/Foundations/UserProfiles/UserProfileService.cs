@@ -41,11 +41,17 @@ namespace EdlerCareApi.Services.Foundations.Users
             }
         }
 
-        public async ValueTask<UserProfile> RemoveUserProfileAsync(UserProfile user)
+        public async ValueTask<UserProfile> RemoveUserProfileAsync(Guid userProfileId)
         {
             try
             {
-                return await this.storageBroker.UpdateUserProfileAsync(user);
+                UserProfile removedUser = 
+                    await this.storageBroker.SelectUserProfileByIdAsync(userProfileId);
+                if (removedUser != null)
+                {
+                    removedUser.IsDeleted = true;
+                }
+                return await this.storageBroker.UpdateUserProfileAsync(removedUser);
 
             }
             catch (Exception)

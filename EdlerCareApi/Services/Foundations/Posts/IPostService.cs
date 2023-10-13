@@ -7,7 +7,7 @@ namespace EdlerCareApi.Services.Foundations.Posts
         ValueTask<Post> AddPostAsync(Post post);
         ValueTask<Post> RetrievePostByIdAsync(Guid postId);
         ValueTask<Post> ModifyPostAsync(Post post);
-        ValueTask<Post> RemovePostAsync(Post post);
+        ValueTask<Post> RemovePostAsync(Guid postId);
         IQueryable<Post> RetriveAllActivePosts();
     }
 }
