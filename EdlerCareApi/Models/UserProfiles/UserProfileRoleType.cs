@@ -3,6 +3,6 @@
     public enum UserProfileRoleType
     {
         USER,
-        ADMINISTRATOR
+        ADMIN
     }
 }

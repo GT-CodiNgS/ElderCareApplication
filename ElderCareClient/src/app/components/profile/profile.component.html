@@ -1,21 +1,33 @@
 <div class="grid grid-cols-6 mt-20 h-screen">
-  <div class="col-span-1 shadow-sm p-4"></div>
-  <div class="col-span-4 bg-gray-50">
-    <div class="profile-container flex flex-col items-center justify-center">
-      <img
-        src="assets/img/profile-pic.png"
-        alt="Profile Picture"
-        class="profile-pic justify-center align-middle"
-      />
-      <h2>{{ user.name }}</h2>
-      <p><strong>Email:</strong> {{ user.email }}</p>
-      <p><strong>Location:</strong> {{ user.location }}</p>
-      <button class="bg-gray-300 m-5">Edit Profile</button>
-      <button
-        class="bg-lime-600 w-32 hover:bg-amber-500 text-white font-bold py-2 px-4 rounded"
-      >
-        Add Post
-      </button>
+  <div class="col-span-1  p-4"></div>
+  <div class="col-span-4">
+    <div class=" flex flex-row items-center justify-evenly">
+
+      <div class="col-span-2  p-4">
+        <img
+          src="assets/img/profile-pic.png"
+          alt="Profile Picture"
+          class="profile-pic justify-center align-middle"
+        />
+      </div>
+      <div class="flex flex-col col-span-4 p-4 items-end">
+        <h2 class="name">{{ user.name }}</h2>
+        <p>{{ user.email }}</p>
+        <p>{{ user.location }}</p>
+
+        <div class="flex flex-row col-span-4 py-4 items-center">
+          <button
+            (click)="openEditProfileDialog()"
+            class="bg-gray-300 w-32 hover:bg-amber-500 text-white font-bold py-2 px-4 mx-3 rounded"
+          >Edit Profile</button>
+          <button
+            (click)="openAddPostDialog()"
+            class="bg-lime-600 w-32 hover:bg-amber-500 text-white font-bold py-2 px-4 rounded"
+          >
+            Add Post
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- //post start -->
@@ -44,5 +56,5 @@
 
     <!-- // -->
   </div>
-  <div class="col-span-1 rounded shadow-sm p-4"></div>
+  <div class="col-span-1 rounded p-4"></div>
 </div>
