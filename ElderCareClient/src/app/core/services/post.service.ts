@@ -1,14 +1,15 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { SettingsService } from 'src/app/settings.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService implements OnInit {
-  apiUrl = 'https://localhost:7177/api';
+  private apiUrl = `${this.config.baseUrl}/api/`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private config: SettingsService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.getPosts();

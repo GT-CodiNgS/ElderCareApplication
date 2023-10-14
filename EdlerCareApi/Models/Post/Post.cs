@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using EdlerCareApi.Models.UserProfiles;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EdlerCareApi.Models.Post
 {
@@ -15,5 +16,7 @@ namespace EdlerCareApi.Models.Post
         public DateTimeOffset UpdatedDate { get; set; }
         public Guid CreatedBy { get; set; }
         public Guid UpdatedBy { get; set; }
+        public virtual UserProfile CreatedByName { get; set; }
+        public virtual UserProfile UpdatedByName { get; set; }
     }
 }
