@@ -9,13 +9,16 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatButtonModule} from "@angular/material/button";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 
 @NgModule({
   declarations: [
     HeroComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +27,10 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     FormsModule,
     MatSnackBarModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule
   ]
 })
 export class HeroModule { }

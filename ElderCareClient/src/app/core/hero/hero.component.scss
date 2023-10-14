@@ -1,0 +1,24 @@
+.drawer-container{
+  margin-top: 60px;
+  height: 90vh;
+  .side-bar{
+    width: 235px;
+
+    .welcome-text{
+      position: absolute;
+      top: 50px;
+      width: 100%;
+      text-align: center;
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+    .filters-checks{
+      div{
+        input{
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

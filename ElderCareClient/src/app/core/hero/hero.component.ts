@@ -8,6 +8,10 @@ import {MatDialog} from "@angular/material/dialog";
   styleUrls: ['./hero.component.scss']
 })
 export class HeroComponent {
+
+  navSate = true;
+
+  loading = false;
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}
@@ -23,5 +27,12 @@ export class HeroComponent {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  receiveNavState($event: boolean): void{
+    console.log("lhsafd");
+
+    this.loading = true
+    this.navSate = $event;
   }
 }

@@ -22,4 +22,43 @@
     </ul>
   </nav>
 </div>
-<router-outlet></router-outlet>
+
+<mat-drawer-container class="drawer-container">
+  <mat-drawer class="side-bar" mode="side" opened>
+    <div class="col-span-1 bg-gray-50 rounded shadow-sm">
+      <img src="../../../../../assets/home/nav-bar-img.png" alt="">
+      <h2 class="welcome-text">Hi, Welcome</h2>
+      <div class="m-5">
+        <div class="mb-10">
+          <h1 class="text-lg text-black mb-2">About Us</h1>
+          <p>
+            Contrary to popular belief, Lorem Ipsum is not simply random text.
+            It has roots in a piece of classical Latin literature from 45 BC,
+            making it over 2000 years.
+          </p>
+        </div>
+        <div class="filters-checks">
+          <h3>Filter By</h3>
+          <div class="form-check m-3">
+            <input type="checkbox" class="form-check-input" id="priceLowest" />
+            <label class="form-check-label" for="priceLowest">PriceLowest</label>
+          </div>
+          <div class="form-check m-3">
+            <input type="checkbox" class="form-check-input" id="fullTime" />
+            <label class="form-check-label" for="fullTime">FullTime</label>
+          </div>
+          <div class="form-check m-3">
+            <input type="checkbox" class="form-check-input" id="partTime" />
+            <label class="form-check-label" for="partTime">Part time</label>
+          </div>
+          <div class="form-check m-3">
+            <input type="checkbox" class="form-check-input" id="location" />
+            <label class="form-check-label" for="location">Location</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>
+</mat-drawer-container>
+
