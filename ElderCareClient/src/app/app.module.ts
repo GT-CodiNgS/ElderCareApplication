@@ -11,7 +11,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {QuillModule} from "ngx-quill"; // Required for animations
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +25,6 @@ import {QuillModule} from "ngx-quill"; // Required for animations
     BrowserAnimationsModule,
     MatSnackBarModule,
     RouterModule.forRoot(AppRoutingModule),
-    QuillModule.forRoot(),
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

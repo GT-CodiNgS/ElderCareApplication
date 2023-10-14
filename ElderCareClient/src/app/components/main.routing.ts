@@ -14,13 +14,13 @@ export const MainRoutingModule: Routes = [
     children: [
       {
         path: '',
-        component: ProfileComponent,
+        component: HomeComponent,
       },
       {
         path: 'profile',
         loadChildren: () =>
-          import('../components/profile/profile.component').then(
-            (m) => m.ProfileComponent
+          import('../components/home/home.component').then(
+            (m) => m.HomeComponent
           ),
       },
     ],
