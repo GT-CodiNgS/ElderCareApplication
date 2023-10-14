@@ -1,19 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserProfile } from '../models/UserProfile';
+import { SettingsService } from 'src/app/settings.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private url = 'https://localhost:7177';
-  constructor(private http: HttpClient) {}
+  private apiUrl = `${this.config.baseUrl}/api/`;
+
+  constructor(private config: SettingsService, private http: HttpClient) {}
 
   login(user: UserProfile) {
-    return this.http.post(`${this.url}/login`, user);
+    console.log(this.apiUrl);
+
+    return this.http.post(`${this.apiUrl}/login`, user);
   }
 
   register(user: UserProfile) {
-    return this.http.post(`${this.url}/register`, user);
+    return this.http.post(`${this.apiUrl}/register`, user);
   }
 }

@@ -30,7 +30,7 @@ namespace EdlerCareApi.Services.Foundations.Auth
                 IQueryable<UserProfile> userProfiles = this.userProfileService.RetriveAllActiveUserProfiles();
 
                 UserProfile maybeUserProfile =
-                    userProfiles.FirstOrDefault(u => u.Username == user.Username && u.Password == user.Password);
+                    userProfiles.FirstOrDefault(u => u.Username == user.Username);
 
                 if (maybeUserProfile is null)
                 {
@@ -43,6 +43,9 @@ namespace EdlerCareApi.Services.Foundations.Auth
                 }
 
                 string token = CreateToken(maybeUserProfile);
+                maybeUserProfile.PasswordHash = null;
+                maybeUserProfile.PasswordSalt = null;
+                maybeUserProfile.Token = token;
 
                 return maybeUserProfile;
             }
