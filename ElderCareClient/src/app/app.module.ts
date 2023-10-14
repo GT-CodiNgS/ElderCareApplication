@@ -4,13 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './core/guards/auth.guard';
-import { AppRoutingModule } from './app.routing';
-import { Router, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AppRoutingModule} from "./app-routing.module";
+import {HomeComponent} from "./modules/home/home.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,16 +18,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     MatIconModule,
     MatTabsModule,
-    ReactiveFormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
     MatDialogModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    RouterModule.forRoot(AppRoutingModule),
+    AppRoutingModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
-  // exports: [RouterModule],
+  exports: [],
 })
 export class AppModule {}

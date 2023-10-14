@@ -1,10 +1,8 @@
 import { AuthService } from './../../core/services/auth.service';
-import { Component, OnInit, inject } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
-import * as jwt from 'jsonwebtoken';
-import { UserProfile } from 'src/app/core/models/UserProfile';
 
 @Component({
   selector: 'app-login',

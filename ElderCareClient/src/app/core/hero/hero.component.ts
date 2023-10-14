@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from './login/login.component';
+import {LoginComponent} from "../../modules/login/login.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
+  selector: 'app-hero',
+  templateUrl: './hero.component.html',
+  styleUrls: ['./hero.component.scss']
 })
-export class MainComponent {
+export class HeroComponent {
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}

@@ -1,13 +1,13 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Post, PostGenderType } from 'src/app/core/models/Post';
 import { PostService } from 'src/app/core/services/post.service';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
 })
-export class HomeComponent {
+export class DashboardComponent {
   itemsPerPage = 5;
   currentPage = 1;
   // posts: Post[] = [];
