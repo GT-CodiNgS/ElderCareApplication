@@ -21,6 +21,7 @@ namespace EdlerCareApi.Brokers
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            SetUserPostReferences(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -87,7 +88,7 @@ namespace EdlerCareApi.Brokers
             //string userId = this.httpContextAccessor.HttpContext?
             //    .User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)
             //    ?.Value;
-            string userId = "00000000-0000-0000-0000-000000000000";
+            string userId = "7d612f95-084b-4f34-a740-feccd3b2377e";
             Console.WriteLine($"Captured UserId {userId}");
             if (userId != null)
             {
