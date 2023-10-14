@@ -21,7 +21,7 @@
                 placeholder="Post Title"
               />
             </div>
-            <div>
+            <div class="pb-3">
               <label for="description" class="sr-only">Description</label>
               <input
                 formControlName="description"
@@ -31,6 +31,14 @@
                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Description"
               />
+            </div>
+              <label id="example-radio-group-label flex-row">Gender Type</label>
+            <div class="pb-3">
+              <mat-radio-group class="pb-3" aria-label="Select an option">
+                <mat-radio-button value="1">Male</mat-radio-button>
+                <mat-radio-button value="2">Female</mat-radio-button>
+                <mat-radio-button value="3">Unisex</mat-radio-button>
+              </mat-radio-group>
             </div>
             <div>
               <button

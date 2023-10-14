@@ -10,7 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Required for animations
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {QuillModule} from "ngx-quill"; // Required for animations
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
     BrowserAnimationsModule,
     MatSnackBarModule,
     RouterModule.forRoot(AppRoutingModule),
+    QuillModule.forRoot(),
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

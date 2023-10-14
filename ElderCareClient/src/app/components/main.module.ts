@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ProfileComponent } from './profile/profile.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     MatInputModule,
     DatePipe,
     RouterModule.forChild(MainRoutingModule),
+    MatRadioModule,
   ],
   exports: [],
   providers: [],
