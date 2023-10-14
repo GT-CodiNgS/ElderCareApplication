@@ -1,8 +1,11 @@
-﻿using EdlerCareApi.Dtos.User;
+﻿using EdlerCareApi.Dtos;
+using EdlerCareApi.Dtos.User;
 using EdlerCareApi.Dtos.User.Exceptions;
 using EdlerCareApi.Models.RefreshToken;
 using EdlerCareApi.Models.UserProfiles;
+using EdlerCareApi.Services.Foundations.Email;
 using EdlerCareApi.Services.Foundations.Users;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -15,12 +18,20 @@ namespace EdlerCareApi.Services.Foundations.Auth
     public class AuthService : IAuthService
     {
         private readonly IUserProfileService userProfileService;
+        private readonly IEmailService emailService;
         private readonly IConfiguration configuration;
+        private readonly EmailSettings _emailSettings;
 
-        public AuthService(IUserProfileService userProfileService, IConfiguration configuration)
+        public AuthService(
+            IUserProfileService userProfileService,
+            IConfiguration configuration,
+            IEmailService emailService,
+            IOptions<EmailSettings> emailSettings)
         {
             this.userProfileService = userProfileService;
+            this.emailService = emailService;
             this.configuration = configuration;
+            _emailSettings = emailSettings.Value;
         }
 
         public UserProfile LoginUserAsync(UserDto user)
@@ -83,6 +94,15 @@ namespace EdlerCareApi.Services.Foundations.Auth
                 {
                     string token = CreateToken(addedUserProfile);
                     addedUserProfile.Token = token;
+                    string apiUrl = _emailSettings.ApiUrl;
+
+                    var confirmationLink = $"{apiUrl}/confirm?token={token}";
+                    await this.emailService.SendEmailAsync(
+                        addedUserProfile.Username,
+                        addedUserProfile.Email,
+                        "Confirm your email",
+                        $"Please confirm your email by clicking this link: " +
+                        $"{confirmationLink}");
                 }
                 return addedUserProfile;
             }
@@ -113,8 +133,9 @@ namespace EdlerCareApi.Services.Foundations.Auth
         private string CreateToken(UserProfile user)
         {
             List<Claim> claims = new List<Claim> {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, "Admin"),
+                new Claim(ClaimTypes.Role, "User"),
                 //new Claim(ClaimTypes.Role, "User"),
             };
 
@@ -134,36 +155,6 @@ namespace EdlerCareApi.Services.Foundations.Auth
 
             return jwt;
         }
-
-        //private string CreateToken(UserProfile user)
-        //{
-        //    string role = user.RoleType.ToString();
-        //    List<Claim> claims = new List<Claim>
-        //    {
-        //        new Claim(ClaimTypes.Name, user.Id.ToString()),
-        //        new Claim(ClaimTypes.Role, role)
-        //    };
-
-        //    var keyBytes = new byte[64];
-        //    using (var rng = RandomNumberGenerator.Create())
-        //    {
-        //        rng.GetBytes(keyBytes);
-        //    }
-
-        //    var key = new SymmetricSecurityKey(keyBytes);
-
-
-        //    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-        //    var token = new JwtSecurityToken(
-        //        claims: claims,
-        //        expires: DateTime.Now.AddDays(2),
-        //        signingCredentials: creds);
-
-        //    var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-        //    return jwt;
-        //}
 
         private RefreshToken GenerateRefreshToken()
         {

@@ -9,7 +9,7 @@ namespace EdlerCareApi.Services.Foundations.Users
         private readonly IStorageBroker storageBroker;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-        public UserProfileService(IStorageBroker storageBroker)
+        public UserProfileService(IStorageBroker storageBroker, IHttpContextAccessor httpContextAccessor)
         {
             this.storageBroker = storageBroker;
             this.httpContextAccessor = httpContextAccessor;
@@ -96,6 +96,28 @@ namespace EdlerCareApi.Services.Foundations.Users
                 result = httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
             }
             return result;
+        }
+
+        public async ValueTask<UserProfile> GetUserByToken(string token)
+        {
+            try
+            {
+                string userId = this.httpContextAccessor.HttpContext?
+                    .User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)
+                        ?.Value;
+
+                //string userId = this.httpContextAccessor.HttpContext?
+                //    .User?.Claims?.FirstOrDefault(c => c.Type ==
+                //        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
+                //        ?.Value;
+
+                return await this.storageBroker.SelectUserProfileByIdAsync(new Guid(userId));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
     }
