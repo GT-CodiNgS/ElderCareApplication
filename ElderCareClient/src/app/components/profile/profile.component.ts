@@ -1,6 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { Post } from 'src/app/core/models/Post';
 import { PostService } from 'src/app/core/services/post.service';
+import {LoginComponent} from "../login/login.component";
+import {MatDialog} from "@angular/material/dialog";
+import {AddPostComponent} from "../add-post/add-post.component";
+import {EditProfileComponent} from "../edit-profile/edit-profile.component";
 
 @Component({
   selector: 'app-profile',
@@ -8,6 +12,9 @@ import { PostService } from 'src/app/core/services/post.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
+
+  constructor(public dialog: MatDialog) {}
+
   user = {
     name: 'John Doe',
     email: 'john.doe@example.com',
@@ -30,6 +37,32 @@ export class ProfileComponent {
   ngOnInit(): void {
     this.postService.getPosts().subscribe((posts) => {
       this.posts = posts;
+    });
+  }
+
+  openAddPostDialog(): void {
+    const dialogRef = this.dialog.open(AddPostComponent, {
+      width: '500px',
+      height: 'auto',
+      panelClass: 'model-preview',
+      hasBackdrop: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openEditProfileDialog() {
+    const dialogRef = this.dialog.open(EditProfileComponent, {
+      width: '500px',
+      height: 'auto',
+      panelClass: 'model-preview',
+      hasBackdrop: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
     });
   }
 }

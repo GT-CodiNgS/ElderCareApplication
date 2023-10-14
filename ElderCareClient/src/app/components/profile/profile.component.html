@@ -17,9 +17,11 @@
 
         <div class="flex flex-row col-span-4 py-4 items-center">
           <button
+            (click)="openEditProfileDialog()"
             class="bg-gray-300 w-32 hover:bg-amber-500 text-white font-bold py-2 px-4 mx-3 rounded"
           >Edit Profile</button>
           <button
+            (click)="openAddPostDialog()"
             class="bg-lime-600 w-32 hover:bg-amber-500 text-white font-bold py-2 px-4 rounded"
           >
             Add Post

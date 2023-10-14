@@ -15,6 +15,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ProfileComponent } from './profile/profile.component';
+import { AddPostComponent } from './add-post/add-post.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { ProfileComponent } from './profile/profile.component';
     SignUpComponent,
     AnimationComponent,
     ProfileComponent,
+    AddPostComponent,
+    EditProfileComponent,
   ],
   imports: [
     NgxPaginationModule,
