@@ -12,6 +12,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {AddPostComponent} from "../../modules/add-post/add-post.component";
+import {MatRadioModule} from "@angular/material/radio";
 
 
 @NgModule({
@@ -19,6 +21,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     HeroComponent,
     HomeComponent,
     LoginComponent,
+    AddPostComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +33,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     MatFormFieldModule,
     MatToolbarModule,
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatRadioModule
   ]
 })
 export class HeroModule { }

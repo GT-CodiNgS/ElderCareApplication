@@ -5,6 +5,7 @@ import { HeroComponent } from './hero.component';
 const routes: Routes = [{ path: '', component: HeroComponent, children:
     [
       { path: '', loadChildren: () => import('../../modules/home/home.module').then(m => m.HomeModule) },
+      { path: 'my-profile', loadChildren: () => import('../../modules/my-profile/my-profile.module').then(m => m.MyProfileModule) },
     ]
 }];
 

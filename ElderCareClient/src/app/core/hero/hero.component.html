@@ -2,12 +2,12 @@
   <nav class="flex items-center justify-between">
     <div class="text-white text-2xl font-semibold">ELDER CARE</div>
     <ul class="flex space-x-4 pr-8">
-      <li><a class="text-white">Home</a></li>
+      <li><a [routerLink]="'..'" class="text-white">Home</a></li>
       <li>
         <a [routerLink]="'about'" class="text-white cursor-pointer">Posts</a>
       </li>
       <li>
-        <a [routerLink]="'profile'" class="text-white cursor-pointer"
+        <a [routerLink]="'my-profile'" class="text-white cursor-pointer"
         >Profile</a
         >
       </li>
@@ -37,7 +37,7 @@
             making it over 2000 years.
           </p>
         </div>
-        <div class="filters-checks">
+        <div *ngIf="router.url === '/hero'" class="filters-checks">
           <h3>Filter By</h3>
           <div class="form-check m-3">
             <input type="checkbox" class="form-check-input" id="priceLowest" />

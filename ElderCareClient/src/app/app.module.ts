@@ -11,6 +11,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AppRoutingModule} from "./app-routing.module";
 import {HomeComponent} from "./modules/home/home.component";
+import {MatRadioButton} from "@angular/material/radio";
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,7 @@ import {HomeComponent} from "./modules/home/home.component";
     MatDialogModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

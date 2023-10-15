@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {LoginComponent} from "../../modules/login/login.component";
 import {MatDialog} from "@angular/material/dialog";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-hero',
@@ -12,7 +13,8 @@ export class HeroComponent {
   navSate = true;
 
   loading = false;
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,
+              public router: Router) {}
 
   ngOnInit(): void {}
 
