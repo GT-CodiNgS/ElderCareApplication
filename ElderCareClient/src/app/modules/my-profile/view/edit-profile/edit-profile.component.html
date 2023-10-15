@@ -1,5 +1,5 @@
 <div class="model">
-  <div class="login-modal-content">
+  <div class="login-modal-content" style="max-height: 80vh;">
     <div class="flex items-center justify-center bg-gray-100">
       <div class="w-96 space-y-4">
         <div>
@@ -111,17 +111,6 @@
 
               </div>
 
-              <div style="width: 48%;">
-                <label for="about" class="sr-only">About</label>
-                <textarea
-                  id="about"
-                  formControlName="about"
-                  type="text"
-                  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="About"></textarea>
-                <mat-error *ngIf="checkError('about', 'required')">Required</mat-error>
-
-              </div>
             </div>
 
             <div>

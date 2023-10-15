@@ -22,7 +22,6 @@ export class EditProfileComponent implements OnInit {
     '',
     '',
     '',
-    '',
   );
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any,
@@ -40,7 +39,6 @@ export class EditProfileComponent implements OnInit {
         address: ['', Validators.required],
         city: ['', Validators.required],
         username: ['', Validators.required],
-        about: ['', Validators.required],
       }
     )
 
@@ -56,7 +54,6 @@ export class EditProfileComponent implements OnInit {
     this.detailsForm.get('address')?.setValue(this.userDetail.address)
     this.detailsForm.get('city')?.setValue(this.userDetail.city)
     this.detailsForm.get('username')?.setValue(this.userDetail.username)
-    this.detailsForm.get('about')?.setValue(this.userDetail.about)
   }
 
   updateProfile() {
