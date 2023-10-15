@@ -97,12 +97,14 @@ namespace EdlerCareApi.Services.Foundations.Auth
                     string apiUrl = _emailSettings.ApiUrl;
 
                     var confirmationLink = $"{apiUrl}/confirm?userId={addedUserProfile.Id}";
+
+                    var emailBody = $"Please confirm your email by <a href='{confirmationLink}'>clicking here</a>.";
+
                     bool isEmailSent = await this.emailService.SendEmailAsync(
                         addedUserProfile.Username,
                         addedUserProfile.Email,
                         "Confirm your email",
-                        $"Please confirm your email by clicking this link: " +
-                        $"{confirmationLink}");
+                        emailBody);
 
                     if (isEmailSent)
                     {
