@@ -69,6 +69,34 @@ namespace EdlerCareApi.Controllers
             }
         }
 
+        [HttpGet("confirm"), AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId)
+        {
+            var userProfile =
+                await this.userService.RetrieveUserProfileByIdAsync(Guid.Parse(userId));
+
+            if (userProfile == null)
+                return BadRequest("Invalid token");
+
+            userProfile.IsVerfied = true;
+            await this.userService.ModifyUserProfileAsync(userProfile);
+
+            var htmlContent = @"
+            <html>
+                <head>
+                    <title>Email Confirmation</title>
+                </head>
+                <body style='text-align: center; padding-top: 50px; font-family: Arial, sans-serif;'>
+                    <div style='color: green; font-size: 50px;'>&#10004;</div> <!-- This is the green checkmark -->
+                    <h2>Email confirmed successfully!</h2>
+                    <p>Thank you for confirming your email address. You can now continue using our services.</p>
+                </body>
+            </html>";
+
+            return Content(htmlContent, "text/html");
+        }
+
+
         //[HttpPost("refresh-token")]
         //public async ValueTask<ActionResult<string>> RefreshToken()
         //{

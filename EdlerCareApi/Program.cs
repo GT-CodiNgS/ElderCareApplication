@@ -1,7 +1,10 @@
+using EdlerCareApi.Dtos;
 using EdlerCareApi.Extensions;
+using FluentAssertions.Common;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using System.Configuration;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +18,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddConfiguredServiceDependancies();
 builder.Services.AddConfiguredBrokerDependancies();
 builder.Services.AddConfigureDbContexts();
+
+var configuration = builder.Configuration;
+
+builder.Services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
 
 builder.Services.AddSwaggerGen(options =>
 {

@@ -1,4 +1,5 @@
 ﻿using EdlerCareApi.Brokers;
+using EdlerCareApi.Dtos.User.Exceptions;
 using EdlerCareApi.Models.UserProfiles;
 using System.Security.Claims;
 
@@ -9,7 +10,7 @@ namespace EdlerCareApi.Services.Foundations.Users
         private readonly IStorageBroker storageBroker;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-        public UserProfileService(IStorageBroker storageBroker)
+        public UserProfileService(IStorageBroker storageBroker, IHttpContextAccessor httpContextAccessor)
         {
             this.storageBroker = storageBroker;
             this.httpContextAccessor = httpContextAccessor;
@@ -96,6 +97,25 @@ namespace EdlerCareApi.Services.Foundations.Users
                 result = httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
             }
             return result;
+        }
+
+        public async ValueTask<UserProfile> GetLoggedUserId()
+        {
+            try
+            {
+                Guid userId = this.storageBroker.GetLoggedUserId();
+                if (userId == Guid.Empty)
+                {
+                    throw new UserNotFoundException();
+                }
+
+                return await this.storageBroker.SelectUserProfileByIdAsync(userId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
     }
