@@ -24,6 +24,7 @@ namespace EdlerCareApi.Models.UserProfiles
         public string? RefreshToken { get; set; } = string.Empty;
         [NotMapped]
         public string? Token { get; set; } = string.Empty;
+        public string? About { get; set; }
         public DateTime? TokenCreated { get; set; }
         public DateTime? TokenExpires { get; set; }
         public DateTimeOffset CreatedDate { get; set; }

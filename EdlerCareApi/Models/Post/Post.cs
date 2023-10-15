@@ -12,6 +12,8 @@ namespace EdlerCareApi.Models.Post
         public PostGenderType PostGenderType { get; set; }
         public string Body { get; set; }
         public bool IsDeleted { get; set; } = false;
+        public bool Status { get; set; } = true;
+        public bool IsVerified { get; set; } = false;
         public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset UpdatedDate { get; set; }
         public Guid CreatedBy { get; set; }
