@@ -13,9 +13,11 @@ import {LocalStorageService} from "../../../../../../core/services/local-storage
 export class PasswordResetComponent implements OnInit{
 
 
+  apiLoading:boolean=false
+
   detailsForm!: FormGroup;
   userDetail = new PasswordReset(
-    0,
+    '',
     '',
     '',
   );
@@ -34,12 +36,19 @@ export class PasswordResetComponent implements OnInit{
   }
 
   updateProfile() {
+    this.apiLoading = true
     if (this.detailsForm.valid){
-      this.userService.resetPassword(this.userDetail).subscribe( res => {
+      this.userService.resetPassword(new PasswordReset(
+        this.localStorageService.getItem('id'),
+        this.detailsForm.get('password')?.value,
+        this.detailsForm.get('confirmPassword')?.value
+      )).subscribe( res => {
+        console.log(res)
         if (res.code == 204){
           this.localStorageService.setItem('token', res.data.roken)
           this.localStorageService.setItem('id', res.data.userId)
           this.localStorageService.setItem('username', res.data.username)
+          this.apiLoading = false
         }
       })
     }else {

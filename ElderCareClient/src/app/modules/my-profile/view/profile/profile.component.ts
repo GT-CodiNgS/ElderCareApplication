@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Post, PostGenderType} from 'src/app/core/models/Post';
 import {PostService} from 'src/app/core/services/post.service';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
@@ -14,7 +14,7 @@ import {PasswordResetComponent} from "./inner-components/password-reset/password
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
 
   selectedUser = new UserUpdate(
     '',
@@ -27,61 +27,30 @@ export class ProfileComponent {
     ''
   );
 
-  posts: Post[] = [
-    {
-      id: '1234567890',
-      title: 'Sample Post Title 1',
-      description: 'This is a brief description of the first sample post.',
-      postGenderType: PostGenderType.Male,
-      body: 'This is the main content of the first sample post. It provides detailed information about the topic and relevant data.',
-      createdDate: new Date('2023-10-14T00:00:00Z'),
-      updatedDate: new Date('2023-10-15T12:34:56Z'),
-      createdBy: 'user_001',
-      updatedBy: 'user_002',
-    },
-    {
-      id: '2345678901',
-      title: 'Sample Post Title 2',
-      description: 'This is a brief description of the second sample post.',
-      postGenderType: PostGenderType.Male,
-      body: 'This is the main content of the second sample post. It delves into the intricacies of the subject matter.',
-      createdDate: new Date('2023-10-15T01:23:45Z'),
-      createdBy: 'user_003',
-    },
-    {
-      id: '3456789012',
-      title: 'Sample Post Title 3',
-      description: 'This is a brief description of the third sample post.',
-      postGenderType: PostGenderType.Male,
-      body: 'This is the main content of the third sample post. It gives an overview of the theme and its relevance.',
-      createdDate: new Date('2023-10-16T10:10:10Z'),
-      updatedDate: new Date('2023-10-16T20:20:20Z'),
-      createdBy: 'user_004',
-      updatedBy: 'user_005',
-    },
-  ];
+  posts: Post[] = [];
 
   constructor(public dialog: MatDialog,
               private userService:UserService,
               private localStorageService: LocalStorageService) {
     // this.getUser();
 
-    this.selectedUser = new UserUpdate(
-      'User',
-      'Name',
-      'user@gmail.com',
-      '',
-      '119',
-      'Hikka',
-      'Hikka',
-      'gayash',
-    )
+    // this.selectedUser = new UserUpdate(
+    //   'User',
+    //   'Name',
+    //   'user@gmail.com',
+    //   '',
+    //   '119',
+    //   'Hikka',
+    //   'Hikka',
+    //   'gayash',
+    // )
   }
 
 
   async getUser() {
-    let userId = this.localStorageService.getItem('userId');
+    let userId = this.localStorageService.getItem('id');
     let byId = await this.userService.getById(userId);
+    console.log(byId)
     if (byId) {
       this.selectedUser = byId
     }
@@ -100,7 +69,13 @@ export class ProfileComponent {
   postService = inject(PostService);
 
   ngOnInit(): void {
-    this.postService.getPosts().subscribe((posts) => {
+    this.getPost();
+    this.getUser();
+  }
+
+  getPost(){
+    let userId = this.localStorageService.getItem('id');
+    this.postService.getPostById(userId).subscribe((posts) => {
       this.posts = posts;
     });
   }
@@ -146,11 +121,15 @@ export class ProfileComponent {
   }
 
   createNewPost() {
-    this.dialog.open(AddPostComponent, {
+    let dialogRef = this.dialog.open(AddPostComponent, {
       width: '500px',
       height: 'auto',
       panelClass: 'model-preview',
       hasBackdrop: true,
     });
+
+    dialogRef.afterClosed().subscribe(res => {
+      this.getPost();
+    })
   }
 }

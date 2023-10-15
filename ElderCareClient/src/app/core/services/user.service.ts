@@ -10,7 +10,7 @@ import {PasswordReset} from "../models/PasswordReset";
 })
 export class UserService {
 
-  url = environment.baseUrl + 'users';
+  url = environment.baseUrl;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -21,9 +21,7 @@ export class UserService {
   getById(id: string):Promise<any>{
     console.log(id)
     return new Promise(((resolve, reject) => {
-      this.httpClient.get(this.url, {
-        params:new HttpParams().append("id", id)
-      }).toPromise().then(res => {
+      this.httpClient.get(this.url + 'UserProfile/'+id).toPromise().then(res => {
         resolve(res)
       }, msg => {
         reject(msg)
@@ -32,6 +30,6 @@ export class UserService {
   }
 
   resetPassword(dto: PasswordReset): Observable<any> {
-    return this.httpClient.put(this.url+'/reset', dto)
+    return this.httpClient.post(this.url+'change-password', dto)
   }
 }

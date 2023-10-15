@@ -3,15 +3,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthGuard } from './core/guards/auth.guard';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AppRoutingModule} from "./app-routing.module";
-import {HomeComponent} from "./modules/home/home.component";
-import {MatRadioButton} from "@angular/material/radio";
+import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
+import {AlertAndErrorInterceptor} from "./core/interceptors/alert-and-error.interceptor";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,9 +25,13 @@ import {MatRadioButton} from "@angular/material/radio";
     MatDialogModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatProgressBarModule
   ],
-  providers: [AuthGuard],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AlertAndErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
   exports: [],
 })

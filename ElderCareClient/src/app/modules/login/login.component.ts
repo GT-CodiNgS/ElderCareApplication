@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import {LocalStorageService} from "../../core/services/local-storage.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -18,12 +20,16 @@ export class LoginComponent implements OnInit {
   isAdded = false;
   isAddedLogin = false;
 
+  apiLoading:boolean=false
+
   ngOnInit(): void {}
 
   constructor(
     private inputFormBuilder: FormBuilder,
     private snackbarService: SnackbarService,
     private authService: AuthService,
+    private route: ActivatedRoute,public router: Router,
+    private localStorageService:LocalStorageService,
     private dialogRef: MatDialogRef<LoginComponent>
   ) {
     this.loginForm = this.inputFormBuilder.group({
@@ -52,22 +58,38 @@ export class LoginComponent implements OnInit {
     this.isSignInForm = !this.isSignInForm;
   }
 
+  public checkSingInError = (controlName: string, errorName: string) => {
+    return this.loginForm.controls[controlName]?.hasError(errorName) && this.loginForm.controls[controlName]?.touched;
+  }
+
+  public checkUpError = (controlName: string, errorName: string) => {
+    return this.signupForm.controls[controlName]?.hasError(errorName) && this.signupForm.controls[controlName]?.touched;
+  }
+
   async signIn() {
+    this.apiLoading = true
     this.isAddedLogin = !this.loginForm.valid;
     if (this.loginForm.valid) {
-      await this.authService.login(this.loginForm.value).subscribe(
+      this.authService.login(this.loginForm.value).subscribe(
         (response) => {
+          setTimeout(function(){
+            console.log('lll')
+          }, 10000);
           this.disableLoginBtn = true;
           this.userData = response;
-          this.setLocalStorage(response);
           this.snackbarService.openCustomSnackBar(
             'Login Successful',
             'success',
             'primary'
           );
-          this.closeDialog();
+          this.apiLoading = false
+          this.localStorageService.setItem('token', this.userData.token);
+          this.localStorageService.setItem('id', this.userData.id);
+          this.dialogRef.close();
+          this.router.navigate([ 'my-profile' ], { relativeTo: this.route });
         },
         (error) => {
+          this.apiLoading = false
           console.log(error);
           this.snackbarService.openCustomSnackBar(
             'Login Failed',
@@ -86,22 +108,26 @@ export class LoginComponent implements OnInit {
   }
 
   async signUp() {
+    this.apiLoading = true
     this.isAdded = !this.signupForm.valid;
     if (this.signupForm.valid) {
-      await this.authService.register(this.signupForm.value).subscribe(
+      this.authService.register(this.signupForm.value).subscribe(
         async (response) => {
           this.disableLoginBtn = true;
           this.userData = response;
-          this.setLocalStorage(response);
+          this.localStorageService.setItem('token', this.userData.result.token);
+          this.localStorageService.setItem('id', this.userData.result.id);
           this.snackbarService.openCustomSnackBar(
             'Registration Successful',
             'success',
             'primary'
           );
+          this.apiLoading = false
           this.closeDialog();
         },
 
         (error) => {
+          this.apiLoading = false
           console.log(error);
           this.snackbarService.openCustomSnackBar(
             'Registration Failed',
@@ -111,6 +137,7 @@ export class LoginComponent implements OnInit {
         }
       );
     } else {
+      this.signupForm.markAsTouched()
       this.snackbarService.openCustomSnackBar(
         'Please fill required fields',
         'error',
@@ -122,7 +149,9 @@ export class LoginComponent implements OnInit {
   setLocalStorage(userData: any) {
     console.log(userData.Id);
 
-    localStorage.setItem('userId', userData.Id);
+    localStorage.setItem('token', userData.Id);
+
+    this.localStorageService.setItem('token', "token");
     console.log(localStorage.getItem('userId'));
   }
 }

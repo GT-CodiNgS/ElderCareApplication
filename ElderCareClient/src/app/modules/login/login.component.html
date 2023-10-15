@@ -1,36 +1,40 @@
 <div>
-  <div class="login-modal-content">
+  <div class="login-modal-content" style="max-height: 80vh;">
     <div class="flex items-center justify-center bg-gray-100">
-      <div class="max-w-sm w-96 space-y-4">
+      <div class="max-w-sm w-96 space-y-4 p-5">
+        <mat-progress-bar *ngIf="apiLoading" mode="indeterminate"></mat-progress-bar>
+
         <div>
           <h2 class="mt-6 text-center text-3xl font-serif text-gray-900">
             {{ isSignInForm ? "Sign In" : "Sign Up" }}
           </h2>
         </div>
         <!-- Sign In Form -->
-        <div *ngIf="isSignInForm; else signUpForm">
-          <form [formGroup]="loginForm">
+        <div class="p-5" *ngIf="isSignInForm; else signUpForm">
+          <form style="padding: 25px;" [formGroup]="loginForm">
             <div class="pb-3">
               <label for="email" class="sr-only">Email</label>
               <input
+                id="email"
                 formControlName="userName"
                 type="email"
-                autocomplete="email"
-                required
                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
               />
+              <mat-error *ngIf="checkSingInError('userName', 'required')">Required</mat-error>
+
             </div>
             <div>
               <label for="password" class="sr-only">Password</label>
               <input
+                id="password"
                 formControlName="password"
                 type="password"
-                autocomplete="current-password"
-                required
                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
+              <mat-error *ngIf="checkSingInError('password', 'required')">Required</mat-error>
+
             </div>
             <div class="mt-5 mb-4 flex items-center justify-between">
               <div class="flex items-center">
@@ -66,7 +70,7 @@
         </div>
 
         <!-- Sign Up Form -->
-        <div>
+        <div class="p-5">
           <form [formGroup]="signupForm" class="overflow-y-scroll">
             <ng-template #signUpForm class="overflow-y-scroll">
               <div>
@@ -78,6 +82,7 @@
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="First Name"
                 />
+                <mat-error *ngIf="checkUpError('firstName', 'required')">Required</mat-error>
 
               </div>
               <div>
@@ -89,6 +94,8 @@
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Last Name"
                 />
+                <mat-error *ngIf="checkUpError('lastName', 'required')">Required</mat-error>
+
               </div>
               <div>
                 <label for="email" class="sr-only">User Name</label>
@@ -98,6 +105,8 @@
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="User Name"
                 />
+                <mat-error *ngIf="checkUpError('userName', 'required')">Required</mat-error>
+
               </div>
               <div>
                 <label for="email" class="sr-only">Email</label>
@@ -108,38 +117,45 @@
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
                 />
+                <mat-error *ngIf="checkUpError('email', 'required')">Required</mat-error>
+
               </div>
               <div>
                 <label for="mobile" class="sr-only">Mobile</label>
                 <input
+                  id="mobile"
                   formControlName="mobile"
                   type="text"
                   autocomplete="mobile"
-                  required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Mobile"
                 />
+                <mat-error *ngIf="checkUpError('mobile', 'required')">Required</mat-error>
 
               </div>
               <div>
                 <label for="address" class="sr-only">Address</label>
                 <input
+                  id="address"
                   formControlName="address"
                   type="text"
-                  required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Address"
                 />
+                <mat-error *ngIf="checkUpError('address', 'required')">Required</mat-error>
+
               </div>
               <div>
                 <label for="city" class="sr-only">City</label>
                 <input
+                  id="city"
                   formControlName="city"
                   type="text"
-                  required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="City"
                 />
+                <mat-error *ngIf="checkUpError('city', 'required')">Required</mat-error>
+
               </div>
               <div>
                 <label for="Password" class="sr-only">Password</label>
@@ -150,18 +166,21 @@
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
                 />
+                <mat-error *ngIf="checkUpError('password', 'required')">Required</mat-error>
+
               </div>
               <div>
-                <label for="confirmedPassword" class="sr-only"
-                  >Re-Password</label
-                >
+                <label for="confirmedPassword" class="sr-only">Re-Password</label>
                 <input
+                  id="confirmedPassword"
                   formControlName="confirmedPassword"
                   type="text"
                   required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Re-Password"
                 />
+                <mat-error *ngIf="checkUpError('confirmedPassword', 'required')">Required</mat-error>
+
               </div>
               <div>
                 <button

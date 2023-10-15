@@ -1,22 +1,32 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginComponent} from "../../modules/login/login.component";
 import {MatDialog} from "@angular/material/dialog";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {LocalStorageService} from "../services/local-storage.service";
 
 @Component({
   selector: 'app-hero',
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.scss']
 })
-export class HeroComponent {
+export class HeroComponent implements OnInit{
 
   navSate = true;
 
   loading = false;
-  constructor(public dialog: MatDialog,
-              public router: Router) {}
 
-  ngOnInit(): void {}
+  loginUser:boolean = false;
+
+
+  constructor(public dialog: MatDialog,
+              private route: ActivatedRoute,public router: Router,
+              public localStorage:LocalStorageService) {
+    console.log(this.router.url == '/url')
+  }
+
+  ngOnInit(): void {
+
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
@@ -36,5 +46,20 @@ export class HeroComponent {
 
     this.loading = true
     this.navSate = $event;
+  }
+
+  logout() {
+    this.localStorage.clear();
+    this.router.navigate([ '' ], { relativeTo: this.route });
+
+  }
+
+  navigateToProfile() {
+    let token = this.localStorage.getItem('token');
+    if (token){
+      this.router.navigate([ 'my-profile' ], { relativeTo: this.route });
+    }else {
+      this.dialog.open(LoginComponent)
+    }
   }
 }
