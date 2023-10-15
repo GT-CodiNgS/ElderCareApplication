@@ -2,5 +2,6 @@
 {
     public partial interface IStorageBroker
     {
+        Guid GetLoggedUserId();
     }
 }

@@ -16,6 +16,7 @@ namespace EdlerCareApi.Models.UserProfiles
         public string? City { get; set; }
         public bool IsDeleted { get; set; } = false;
         public bool IsVerfied { get; set; } = false;
+        public bool IsEmailSent { get; set; } = false;
         public string? Username { get; set; }
         public UserProfileRoleType RoleType { get; set; }
         public byte[]? PasswordHash { get; set; }
@@ -23,6 +24,7 @@ namespace EdlerCareApi.Models.UserProfiles
         public string? RefreshToken { get; set; } = string.Empty;
         [NotMapped]
         public string? Token { get; set; } = string.Empty;
+        public string? About { get; set; }
         public DateTime? TokenCreated { get; set; }
         public DateTime? TokenExpires { get; set; }
         public DateTimeOffset CreatedDate { get; set; }
