@@ -16,6 +16,7 @@ namespace EdlerCareApi.Models.UserProfiles
         public string? City { get; set; }
         public bool IsDeleted { get; set; } = false;
         public bool IsVerfied { get; set; } = false;
+        public bool IsEmailSent { get; set; } = false;
         public string? Username { get; set; }
         public UserProfileRoleType RoleType { get; set; }
         public byte[]? PasswordHash { get; set; }

@@ -96,14 +96,23 @@ namespace EdlerCareApi.Services.Foundations.Auth
                     addedUserProfile.Token = token;
                     string apiUrl = _emailSettings.ApiUrl;
 
-                    var confirmationLink = $"{apiUrl}/confirm?token={token}";
-                    await this.emailService.SendEmailAsync(
+                    var confirmationLink = $"{apiUrl}/confirm?userId={addedUserProfile.Id}";
+                    bool isEmailSent = await this.emailService.SendEmailAsync(
                         addedUserProfile.Username,
                         addedUserProfile.Email,
                         "Confirm your email",
                         $"Please confirm your email by clicking this link: " +
                         $"{confirmationLink}");
+
+                    if (isEmailSent)
+                    {
+                        addedUserProfile.IsEmailSent = true;
+                        addedUserProfile = 
+                            await this.userProfileService.ModifyUserProfileAsync(addedUserProfile);
+                    }
                 }
+                
+
                 return addedUserProfile;
             }
             catch (Exception e)

@@ -70,9 +70,11 @@ namespace EdlerCareApi.Controllers
         }
 
         [HttpGet("confirm"), AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string token)
+        public async Task<IActionResult> ConfirmEmail(string userId)
         {
-            var userProfile = await this.userService.GetUserByToken(token);
+            var userProfile =
+                await this.userService.RetrieveUserProfileByIdAsync(Guid.Parse(userId));
+
             if (userProfile == null)
                 return BadRequest("Invalid token");
 

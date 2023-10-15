@@ -1,4 +1,5 @@
 ﻿using EdlerCareApi.Brokers;
+using EdlerCareApi.Dtos.User.Exceptions;
 using EdlerCareApi.Models.UserProfiles;
 using System.Security.Claims;
 
@@ -98,20 +99,17 @@ namespace EdlerCareApi.Services.Foundations.Users
             return result;
         }
 
-        public async ValueTask<UserProfile> GetUserByToken(string token)
+        public async ValueTask<UserProfile> GetLoggedUserId()
         {
             try
             {
-                string userId = this.httpContextAccessor.HttpContext?
-                    .User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)
-                        ?.Value;
+                Guid userId = this.storageBroker.GetLoggedUserId();
+                if (userId == Guid.Empty)
+                {
+                    throw new UserNotFoundException();
+                }
 
-                //string userId = this.httpContextAccessor.HttpContext?
-                //    .User?.Claims?.FirstOrDefault(c => c.Type ==
-                //        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
-                //        ?.Value;
-
-                return await this.storageBroker.SelectUserProfileByIdAsync(new Guid(userId));
+                return await this.storageBroker.SelectUserProfileByIdAsync(userId);
             }
             catch (Exception)
             {

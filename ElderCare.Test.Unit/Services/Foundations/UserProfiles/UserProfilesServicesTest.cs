@@ -15,7 +15,8 @@ namespace ElderCare.Test.Unit.Services.Foundations.UserProfiles
         {
             this.storageBrokerMock = new Mock<IStorageBroker>();
             this.userProfileService = new UserProfileService(
-                               storageBroker: this.storageBrokerMock.Object);
+                httpContextAccessor: null,
+                storageBroker: this.storageBrokerMock.Object);
         }
 
         private static DateTimeOffset GetRandomDateTime() =>

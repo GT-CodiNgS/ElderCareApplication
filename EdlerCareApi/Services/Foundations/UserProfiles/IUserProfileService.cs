@@ -10,6 +10,6 @@ namespace EdlerCareApi.Services.Foundations.Users
         ValueTask<UserProfile> RemoveUserProfileAsync(Guid userProfileId);
         IQueryable<UserProfile> RetriveAllActiveUserProfiles();
         string GetMyName();
-        ValueTask<UserProfile> GetUserByToken(string token);
+        ValueTask<UserProfile> GetLoggedUserId();
     }
 }
