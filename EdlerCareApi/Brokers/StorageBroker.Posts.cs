@@ -7,7 +7,9 @@ namespace EdlerCareApi.Brokers
     {
         public DbSet<Post> Posts { get; set; }
 
-        public IQueryable<Post> SelectAllPosts() => this.Posts.AsQueryable();
+        public IQueryable<Post> SelectAllPosts() =>
+            this.Posts.Include(post => post.CreatedByName)
+                .Include(post => post.UpdatedByName);
 
         public async ValueTask<Post> InsertPostAsync(Post post) =>
             await InsertAsync(post);

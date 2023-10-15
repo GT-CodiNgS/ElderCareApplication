@@ -1,5 +1,6 @@
 ﻿using EdlerCareApi.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace EdlerCareApi.Brokers
 {
@@ -85,10 +86,10 @@ namespace EdlerCareApi.Brokers
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             DateTimeOffset dateTime = DateTimeOffset.UtcNow;
-            //string userId = this.httpContextAccessor.HttpContext?
-            //    .User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)
-            //    ?.Value;
-            string userId = "7d612f95-084b-4f34-a740-feccd3b2377e";
+            string userId = this.httpContextAccessor.HttpContext?
+                .User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)
+                ?.Value;
+            //string userId = "7d612f95-084b-4f34-a740-feccd3b2377e";
             Console.WriteLine($"Captured UserId {userId}");
             if (userId != null)
             {
@@ -132,6 +133,14 @@ namespace EdlerCareApi.Brokers
                     auditableEntity.UpdatedBy = userId;
                 }
             }
+        }
+
+        public Guid GetLoggedUserId()
+        {
+            string userId = this.httpContextAccessor.HttpContext?
+                .User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)
+                ?.Value;
+            return new Guid(userId);
         }
     }
 }

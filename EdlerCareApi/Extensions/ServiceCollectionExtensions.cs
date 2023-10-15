@@ -1,5 +1,6 @@
 ﻿using EdlerCareApi.Brokers;
 using EdlerCareApi.Services.Foundations.Auth;
+using EdlerCareApi.Services.Foundations.Email;
 using EdlerCareApi.Services.Foundations.OpenAI;
 using EdlerCareApi.Services.Foundations.Posts;
 using EdlerCareApi.Services.Foundations.Users;
@@ -14,6 +15,7 @@ namespace EdlerCareApi.Extensions
             services.AddTransient<IUserProfileService, UserProfileService>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IOpenAIService, OpenAIService>();
+            services.AddTransient<IEmailService, EmailService>();
 
             return services;
         }
