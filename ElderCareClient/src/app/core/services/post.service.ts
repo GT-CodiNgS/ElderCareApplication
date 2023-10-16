@@ -2,8 +2,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SettingsService } from 'src/app/settings.service';
-import {environment} from "../../../environments/environment";
-import {Post} from "../models/Post";
+import { environment } from '../../../environments/environment';
+import { Post } from '../models/Post';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,8 @@ export class PostService implements OnInit {
   }
 
   addPost(post: Post): Observable<any> {
+    console.log(post);
+
     return this.http.post<any>(`${this.apiUrl}Post`, post);
   }
 

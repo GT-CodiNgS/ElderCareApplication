@@ -87,11 +87,13 @@ namespace EdlerCareApi.Services.Foundations.Auth
     
                 if (maybeUserProfile is null)
                 {
+                    return false;
                     throw new UserNotFoundException();
                 }
 
                 if (!VerifyPasswordHash(passwordResetDto.Password, maybeUserProfile.PasswordHash, maybeUserProfile.PasswordSalt))
                 {
+                    return false;
                     throw new Exception("Password incorrect.");
                 }
 

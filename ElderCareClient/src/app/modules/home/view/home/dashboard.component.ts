@@ -13,7 +13,6 @@ import {ViewPostComponent} from "./inner-components/view-post/view-post.componen
 export class DashboardComponent implements OnInit{
   itemsPerPage = 5;
   currentPage = 1;
-  // posts: Post[] = [];
 
   posts: Post[] = []
 
