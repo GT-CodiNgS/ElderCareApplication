@@ -7,6 +7,8 @@ const routes: Routes = [{ path: '', component: HeroComponent, children:
     [
       { path: '', loadChildren: () => import('../../modules/home/home.module').then(m => m.HomeModule) },
       { path: 'my-profile', loadChildren: () => import('../../modules/my-profile/my-profile.module').then(m => m.MyProfileModule), canActivateChild: [AuthGuard] },
+      { path: 'admin-panel', loadChildren: () => import('../../modules/admin-panel/admin-panel.module').then(m => m.AdminPanelModule) },
+
     ]
 }];
 

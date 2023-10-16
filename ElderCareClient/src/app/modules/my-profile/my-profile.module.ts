@@ -10,6 +10,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import { PasswordResetComponent } from './view/profile/inner-components/password-reset/password-reset.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -19,13 +21,15 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     EditProfileComponent,
     PasswordResetComponent
   ],
-    imports: [
-        CommonModule,
-        MyProfileRoutingModule,
-        MatRadioModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatProgressBarModule
-    ]
+  imports: [
+    CommonModule,
+    MyProfileRoutingModule,
+    MatRadioModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatProgressBarModule,
+    MatIconModule,
+    MatButtonModule
+  ]
 })
 export class MyProfileModule { }

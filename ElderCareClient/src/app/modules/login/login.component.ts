@@ -82,9 +82,12 @@ export class LoginComponent implements OnInit {
             'success',
             'primary'
           );
+
+          console.log(this.userData)
           this.apiLoading = false
           this.localStorageService.setItem('token', this.userData.token);
           this.localStorageService.setItem('id', this.userData.id);
+          this.localStorageService.setItem('roleType', this.userData.roleType);
           this.dialogRef.close();
           this.router.navigate([ 'my-profile' ], { relativeTo: this.route });
         },

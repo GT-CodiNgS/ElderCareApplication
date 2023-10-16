@@ -4,9 +4,12 @@
     <ul class="flex space-x-4 pr-8">
       <li><a [routerLink]="'..'" class="text-white">Home</a></li>
       <li>
-        <a (click)="navigateToProfile()" class="text-white cursor-pointer"
-        >Profile</a
-        >
+        <a (click)="navigateToProfile()" class="text-white cursor-pointer">Profile</a>
+      </li>
+
+      <li *ngIf="localStorage.getItem('roleType') == '1'">
+        <a [routerLink]="'admin-panel'" (click)="navigateToAdminPanel()" class="text-white cursor-pointer"
+        >Admin Panel</a>
       </li>
       <li *ngIf="localStorage.getItem('token')" class="ml-2">
         <a
@@ -22,7 +25,7 @@
 
 <mat-drawer-container class="drawer-container">
   <mat-drawer class="side-bar" mode="side" opened>
-    <div class="col-span-1 bg-gray-50 rounded shadow-sm">
+    <div *ngIf="router.url !== '/hero/admin-panel' && router.url !== '/hero/admin-panel/post' && router.url !== '/hero/admin-panel/user'" class="col-span-1 bg-gray-50 rounded shadow-sm">
       <img src="../../../../../assets/home/nav-bar-img.png" alt="">
       <h2 class="welcome-text">Hi, Welcome</h2>
       <div class="m-5">
@@ -54,6 +57,12 @@
           </div>
         </div>
       </div>
+    </div>
+
+
+    <div *ngIf="router.url.concat('admin-panel') && router.url !== '/hero' && router.url !== '/hero/my-profile'" class="menu">
+      <button [routerLink]="'/hero/admin-panel/post'" mat-raised-button>Post</button>
+      <button [routerLink]="'/hero/admin-panel/user'" mat-raised-button>User</button>
     </div>
   </mat-drawer>
   <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>

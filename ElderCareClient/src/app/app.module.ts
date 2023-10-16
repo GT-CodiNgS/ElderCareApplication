@@ -12,22 +12,25 @@ import {AppRoutingModule} from "./app-routing.module";
 import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
 import {AlertAndErrorInterceptor} from "./core/interceptors/alert-and-error.interceptor";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { ConfirmDialogComponent } from './core/dialog/confirm-dialog/confirm-dialog.component';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    MatIconModule,
-    MatTabsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatDialogModule,
-    BrowserAnimationsModule,
-    MatSnackBarModule,
-    AppRoutingModule,
-    MatProgressBarModule
-  ],
+  declarations: [AppComponent, ConfirmDialogComponent],
+    imports: [
+        BrowserModule,
+        MatIconModule,
+        MatTabsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatDialogModule,
+        BrowserAnimationsModule,
+        MatSnackBarModule,
+        AppRoutingModule,
+        MatProgressBarModule,
+        MatButtonModule
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AlertAndErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

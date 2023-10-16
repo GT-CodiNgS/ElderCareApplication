@@ -22,6 +22,7 @@ export class HeroComponent implements OnInit{
               private route: ActivatedRoute,public router: Router,
               public localStorage:LocalStorageService) {
     console.log(this.router.url == '/url')
+    console.log(this.router.url == '/hero/my-profile')
   }
 
   ngOnInit(): void {
@@ -61,5 +62,9 @@ export class HeroComponent implements OnInit{
     }else {
       this.dialog.open(LoginComponent)
     }
+  }
+
+  navigateToAdminPanel() {
+
   }
 }

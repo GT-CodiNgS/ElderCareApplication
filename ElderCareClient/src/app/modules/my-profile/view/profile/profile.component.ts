@@ -8,6 +8,9 @@ import {UserUpdate} from "../../../../core/models/UserUpdate";
 import {UserService} from "../../../../core/services/user.service";
 import {LocalStorageService} from "../../../../core/services/local-storage.service";
 import {PasswordResetComponent} from "./inner-components/password-reset/password-reset.component";
+import {ViewPostComponent} from "../../../home/view/home/inner-components/view-post/view-post.component";
+import {ConfirmDialogComponent} from "../../../../core/dialog/confirm-dialog/confirm-dialog.component";
+import {data} from "autoprefixer";
 
 @Component({
   selector: 'app-profile',
@@ -75,7 +78,7 @@ export class ProfileComponent implements OnInit{
 
   getPost(){
     let userId = this.localStorageService.getItem('id');
-    this.postService.getPostById(userId).subscribe((posts) => {
+    this.postService.getPosts().subscribe((posts) => {
       this.posts = posts;
     });
   }
@@ -130,6 +133,43 @@ export class ProfileComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(res => {
       this.getPost();
+    })
+  }
+
+  edit(post:Post) {
+    let dialogRef = this.dialog.open(AddPostComponent, {
+      width: '500px',
+      height: 'auto',
+      panelClass: 'model-preview',
+      hasBackdrop: true,
+      data:post
+    });
+
+    dialogRef.afterClosed().subscribe( res => {
+      this.getPost();
+    })
+  }
+
+  view(post:Post) {
+    let dialogRef = this.dialog.open(ViewPostComponent, {
+      width: '600px',
+      height: 'auto',
+      panelClass: 'model-preview',
+      hasBackdrop: true,
+      data:post
+    });
+  }
+
+  delete(post:Post) {
+    let matDialogRef = this.dialog.open(
+      ConfirmDialogComponent,
+    {data: {title:'Delete Confirm',message:'Are you sure?' }}
+    );
+    matDialogRef.afterClosed().subscribe(res => {
+      if (res){
+        console.log(res)
+        //delete
+      }
     })
   }
 }
