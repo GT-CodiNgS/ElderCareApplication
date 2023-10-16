@@ -10,7 +10,6 @@ import { PostService } from 'src/app/core/services/post.service';
 export class DashboardComponent {
   itemsPerPage = 5;
   currentPage = 1;
-  // posts: Post[] = [];
 
   posts: Post[] = []
 
