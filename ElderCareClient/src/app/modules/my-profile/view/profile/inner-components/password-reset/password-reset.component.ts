@@ -33,8 +33,8 @@ export class PasswordResetComponent implements OnInit {
   }
 
   updatePassword() {
-    this.apiLoading = true;
     if (this.detailsForm.valid) {
+      this.apiLoading = true;
       this.userService
         .resetPassword(
           new PasswordReset(
@@ -62,6 +62,11 @@ export class PasswordResetComponent implements OnInit {
           }
         });
     } else {
+      this.snackbarService.openCustomSnackBar(
+        'Please fill required fields',
+        'error',
+        'warn'
+      );
       this.detailsForm.markAsTouched();
     }
   }
