@@ -1,4 +1,5 @@
-﻿using EdlerCareApi.Dtos;
+﻿using EdlerCareApi.Brokers;
+using EdlerCareApi.Dtos;
 using EdlerCareApi.Dtos.User;
 using EdlerCareApi.Dtos.User.Exceptions;
 using EdlerCareApi.Models.RefreshToken;
@@ -21,16 +22,19 @@ namespace EdlerCareApi.Services.Foundations.Auth
         private readonly IEmailService emailService;
         private readonly IConfiguration configuration;
         private readonly EmailSettings _emailSettings;
+        private readonly IStorageBroker storageBroker;
 
         public AuthService(
             IUserProfileService userProfileService,
             IConfiguration configuration,
             IEmailService emailService,
-            IOptions<EmailSettings> emailSettings)
+            IOptions<EmailSettings> emailSettings,
+            IStorageBroker storageBroker)
         {
             this.userProfileService = userProfileService;
             this.emailService = emailService;
             this.configuration = configuration;
+            this.storageBroker = storageBroker;
             _emailSettings = emailSettings.Value;
         }
 
@@ -74,9 +78,39 @@ namespace EdlerCareApi.Services.Foundations.Auth
             throw new NotImplementedException();
         }
 
-        public ValueTask<UserDto> RefreshTokenAsync(UserDto user)
+        public bool IsPasswordReset(PasswordResetDto passwordResetDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                UserProfile maybeUserProfile = 
+                    this.storageBroker.SelectUserProfileByIdAsync(new Guid(passwordResetDto.userId)).Result;
+    
+                if (maybeUserProfile is null)
+                {
+                    throw new UserNotFoundException();
+                }
+
+                if (!VerifyPasswordHash(passwordResetDto.Password, maybeUserProfile.PasswordHash, maybeUserProfile.PasswordSalt))
+                {
+                    throw new Exception("Password incorrect.");
+                }
+
+                CreatePasswordHash(passwordResetDto.ConfirmPassword, out byte[] passwordHash, out byte[] passwordSalt);
+                maybeUserProfile.PasswordHash = passwordHash;
+                maybeUserProfile.PasswordSalt = passwordSalt;
+                maybeUserProfile.UpdatedDate = DateTime.UtcNow;
+                maybeUserProfile.TokenCreated = DateTime.UtcNow;
+
+                ValueTask<UserProfile> updatedUserProfile 
+                    = this.storageBroker.UpdateUserProfileAsync(maybeUserProfile);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
 
         public async ValueTask<UserProfile> RegisterUserAsync(UserProfile userProfile)
@@ -113,7 +147,7 @@ namespace EdlerCareApi.Services.Foundations.Auth
                     //        await this.userProfileService.ModifyUserProfileAsync(addedUserProfile);
                     //}
                 }
-                
+
 
                 return addedUserProfile;
             }
@@ -177,6 +211,11 @@ namespace EdlerCareApi.Services.Foundations.Auth
             };
 
             return refreshToken;
+        }
+
+        public ValueTask<UserDto> RefreshTokenAsync(UserDto user)
+        {
+            throw new NotImplementedException();
         }
     }
 }

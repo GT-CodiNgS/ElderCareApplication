@@ -1,4 +1,5 @@
-﻿using EdlerCareApi.Dtos.User;
+﻿using EdlerCareApi.Dtos;
+using EdlerCareApi.Dtos.User;
 using EdlerCareApi.Models.RefreshToken;
 using EdlerCareApi.Models.UserProfiles;
 using EdlerCareApi.Services.Foundations.Auth;
@@ -62,6 +63,23 @@ namespace EdlerCareApi.Controllers
                 SetRefreshToken(refreshToken);
 
                 return Ok(mayBeUserProfile);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        [HttpPost("change-password")]
+        public async ValueTask<ActionResult<string>> ForgotPassword([FromBody] PasswordResetDto passwordResetDto)
+        {
+            try
+            {
+                bool isReseted = this.authService.IsPasswordReset(passwordResetDto);
+                var refreshToken = GenerateRefreshToken();
+                SetRefreshToken(refreshToken);
+
+                return Ok(isReseted);
             }
             catch (Exception e)
             {

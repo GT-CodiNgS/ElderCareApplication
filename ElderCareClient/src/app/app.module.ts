@@ -1,19 +1,17 @@
 import { MatIconModule } from '@angular/material/icon';
-import { APP_INITIALIZER, NgModule, inject } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthGuard } from './core/guards/auth.guard';
-import { AppRoutingModule } from './app.routing';
-import { Router, RouterModule } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { catchError, of, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { SettingsService } from './settings.service';
+import {AppRoutingModule} from "./app-routing.module";
+import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
+import {AlertAndErrorInterceptor} from "./core/interceptors/alert-and-error.interceptor";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,51 +19,20 @@ import { SettingsService } from './settings.service';
     BrowserModule,
     MatIconModule,
     MatTabsModule,
-    ReactiveFormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
     MatDialogModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    RouterModule.forRoot(AppRoutingModule),
+    AppRoutingModule,
+    MatProgressBarModule
   ],
   providers: [
-    AuthGuard,
-    AppComponent,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: () => {
-        const settingsService = inject(SettingsService);
-        const http = inject(HttpClient);
-        return () =>
-          new Promise((resolve) => {
-            if (environment.production) {
-              http
-                .get('./config.json')
-                .pipe(
-                  tap((data: any) => {
-                    settingsService.baseUrl = data.baseUrl;
-                    resolve(true);
-                  }),
-                  catchError((error) => {
-                    settingsService.baseUrl = 'http://default.api';
-                    resolve(true);
-                    return of(null);
-                  })
-                )
-                .subscribe();
-            } else {
-              // load settings for a local app
-              const settings = require('../../config.json');
-              settingsService.baseUrl = settings.baseUrl;
-              resolve(true);
-            }
-          });
-      },
-      multi: true,
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: AlertAndErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
-  // exports: [RouterModule],
+  exports: [],
 })
 export class AppModule {}

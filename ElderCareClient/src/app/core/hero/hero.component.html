@@ -1,0 +1,61 @@
+<div class="bg-blue-950 p-4 fixed top-0 w-full z-10">
+  <nav class="flex items-center justify-between">
+    <div class="text-white text-2xl font-semibold">ELDER CARE</div>
+    <ul class="flex space-x-4 pr-8">
+      <li><a [routerLink]="'..'" class="text-white">Home</a></li>
+      <li>
+        <a (click)="navigateToProfile()" class="text-white cursor-pointer"
+        >Profile</a
+        >
+      </li>
+      <li *ngIf="localStorage.getItem('token')" class="ml-2">
+        <a
+          disabled
+          (click)="logout()"
+          class="text-black font-mono pr-3 pl-3 p-1 rounded-sm text-center cursor-pointer bg-orange-600"
+        >Logout</a>
+      </li>
+
+    </ul>
+  </nav>
+</div>
+
+<mat-drawer-container class="drawer-container">
+  <mat-drawer class="side-bar" mode="side" opened>
+    <div class="col-span-1 bg-gray-50 rounded shadow-sm">
+      <img src="../../../../../assets/home/nav-bar-img.png" alt="">
+      <h2 class="welcome-text">Hi, Welcome</h2>
+      <div class="m-5">
+        <div class="mb-10">
+          <h1 class="text-lg text-black mb-2">About Us</h1>
+          <p>
+            Contrary to popular belief, Lorem Ipsum is not simply random text.
+            It has roots in a piece of classical Latin literature from 45 BC,
+            making it over 2000 years.
+          </p>
+        </div>
+        <div *ngIf="router.url == '/url'" class="filters-checks">
+          <h3>Filter By</h3>
+          <div class="form-check m-3">
+            <input type="checkbox" class="form-check-input" id="priceLowest" />
+            <label class="form-check-label" for="priceLowest">PriceLowest</label>
+          </div>
+          <div class="form-check m-3">
+            <input type="checkbox" class="form-check-input" id="fullTime" />
+            <label class="form-check-label" for="fullTime">FullTime</label>
+          </div>
+          <div class="form-check m-3">
+            <input type="checkbox" class="form-check-input" id="partTime" />
+            <label class="form-check-label" for="partTime">Part time</label>
+          </div>
+          <div class="form-check m-3">
+            <input type="checkbox" class="form-check-input" id="location" />
+            <label class="form-check-label" for="location">Location</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>
+</mat-drawer-container>
+
