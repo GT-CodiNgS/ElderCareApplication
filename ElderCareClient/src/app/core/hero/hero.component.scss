@@ -1,5 +1,4 @@
 .drawer-container{
-  margin-top: 60px;
   height: 90vh;
   .side-bar{
     width: 235px;
@@ -33,4 +32,16 @@
     width: 100%;
     margin-bottom: 5px;
   }
+}
+
+.custom-speed-progress-bar ::ng-deep .mat-progress-bar-primary {
+    animation-duration: 0.1s !important;  /* Adjust the time as desired */
+}
+
+.custom-speed-progress-bar ::ng-deep .mat-progress-bar-buffer {
+    animation: mat-progress-bar-buffer 0.1s infinite !important;  /* Adjust the time as desired */
+}
+
+.custom-speed-progress-bar ::ng-deep .mat-progress-bar-fill::after {
+    animation: none !important;
 }

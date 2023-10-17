@@ -5,17 +5,17 @@ import { AdminPanelRoutingModule } from './admin-panel-routing.module';
 import { AdminPanelComponent } from './admin-panel.component';
 import { PostComponent } from './view/post/post.component';
 import { UserComponent } from './view/user/user.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
-  declarations: [
-    AdminPanelComponent,
-    PostComponent,
-    UserComponent
-  ],
+  declarations: [AdminPanelComponent, PostComponent, UserComponent],
   imports: [
     CommonModule,
-    AdminPanelRoutingModule
-  ]
+    AdminPanelRoutingModule,
+    MatTableModule,
+    MatPaginatorModule,
+  ],
 })
-export class AdminPanelModule { }
+export class AdminPanelModule {}

@@ -31,6 +31,14 @@
     </ul>
   </nav>
 </div>
+<div style="margin-top: 65px; height: 3px">
+  <mat-progress-bar
+    class="custom-speed-progress-bar"
+    mode="indeterminate"
+    *ngIf="isLoading$ | async"
+    color="warn"
+  ></mat-progress-bar>
+</div>
 
 <mat-drawer-container class="drawer-container">
   <mat-drawer class="side-bar" mode="side" opened>
