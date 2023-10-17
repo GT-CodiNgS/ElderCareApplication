@@ -1,16 +1,16 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {Post, PostGenderType} from 'src/app/core/models/Post';
-import {PostService} from 'src/app/core/services/post.service';
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {AddPostComponent} from "../../../add-post/add-post.component";
-import {EditProfileComponent} from "../edit-profile/edit-profile.component";
-import {UserUpdate} from "../../../../core/models/UserUpdate";
-import {UserService} from "../../../../core/services/user.service";
-import {LocalStorageService} from "../../../../core/services/local-storage.service";
-import {PasswordResetComponent} from "./inner-components/password-reset/password-reset.component";
-import {ViewPostComponent} from "../../../home/view/home/inner-components/view-post/view-post.component";
-import {ConfirmDialogComponent} from "../../../../core/dialog/confirm-dialog/confirm-dialog.component";
-import {data} from "autoprefixer";
+import { Component, inject, OnInit } from '@angular/core';
+import { Post, PostGenderType } from 'src/app/core/models/Post';
+import { PostService } from 'src/app/core/services/post.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AddPostComponent } from '../../../add-post/add-post.component';
+import { EditProfileComponent } from '../edit-profile/edit-profile.component';
+import { UserUpdate } from '../../../../core/models/UserUpdate';
+import { UserService } from '../../../../core/services/user.service';
+import { LocalStorageService } from '../../../../core/services/local-storage.service';
+import { PasswordResetComponent } from './inner-components/password-reset/password-reset.component';
+import { ViewPostComponent } from '../../../home/view/home/inner-components/view-post/view-post.component';
+import { ConfirmDialogComponent } from '../../../../core/dialog/confirm-dialog/confirm-dialog.component';
+import { data } from 'autoprefixer';
 
 @Component({
   selector: 'app-profile',
@@ -78,7 +78,7 @@ export class ProfileComponent implements OnInit {
 
   openAddPostDialog(): void {
     const dialogRef = this.dialog.open(AddPostComponent, {
-      width: '500px',
+      width: '1022px',
       height: 'auto',
       panelClass: 'model-preview',
       hasBackdrop: true,
@@ -116,7 +116,7 @@ export class ProfileComponent implements OnInit {
 
   createNewPost() {
     let dialogRef = this.dialog.open(AddPostComponent, {
-      width: '500px',
+      width: '1022px',
       height: 'auto',
       panelClass: 'model-preview',
       hasBackdrop: true,
@@ -129,7 +129,7 @@ export class ProfileComponent implements OnInit {
 
   edit(post: Post) {
     let dialogRef = this.dialog.open(AddPostComponent, {
-      width: '500px',
+      width: '1022px',
       height: 'auto',
       panelClass: 'model-preview',
       hasBackdrop: true,
@@ -143,8 +143,8 @@ export class ProfileComponent implements OnInit {
 
   view(post: Post) {
     let dialogRef = this.dialog.open(ViewPostComponent, {
-      width: '600px',
-      height: 'auto',
+      width: '1022px',
+      height: '650px',
       panelClass: 'model-preview',
       hasBackdrop: true,
       data: post,
