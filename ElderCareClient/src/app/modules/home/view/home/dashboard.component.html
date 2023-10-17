@@ -2,16 +2,20 @@
   <div style="margin-left: 15px" class="col-span-4 post-sec bg-white">
     <div class="search-container mr-4 ml-4">
       <input
+        (input)="searchPosts(searchInput.value)"
+        #searchInput
         type="text"
         class="rounded-md border search-input w-full"
         placeholder="Search..."
       />
-      <button class="search-button">Search</button>
+      <button class="search-button" (click)="searchPosts(searchInput.value)">
+        Search
+      </button>
     </div>
     <div class="grid grid-rows-1 md:grid-rows-2 lg:grid-rows-3 gap-4 p-5">
       <div
         style="height: 340px"
-        *ngFor="let post of posts"
+        *ngFor="let post of filteredPosts"
         class="bg-white rounded shadow-black p-7 shadow-md"
       >
         <div>

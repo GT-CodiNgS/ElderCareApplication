@@ -31,6 +31,8 @@ export class DashboardComponent implements OnInit {
   PostGenderType = PostGenderType;
 
   posts: Post[] = [];
+  filteredPosts: Post[] = [];
+  searchQuery: string = '';
 
   carouselOptions = {
     loop: true,
@@ -46,7 +48,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.postService.getPosts().subscribe((posts) => {
       this.posts = posts;
-      console.log(posts);
+      this.filteredPosts = posts;
     });
     let colors: string[] = ['red', 'blue', 'green', 'yellow'];
     let index = 0;
@@ -55,6 +57,19 @@ export class DashboardComponent implements OnInit {
       this.colorState = colors[index % colors.length];
       index++;
     }, 800);
+  }
+
+  searchPosts(query: string): void {
+    query = query.trim(); 
+
+    if (!query) {
+      this.filteredPosts = [...this.posts]; 
+      return;
+    }
+
+    this.filteredPosts = this.posts.filter((post) =>
+      post.title.toLowerCase().includes(query.toLowerCase())
+    );
   }
 
   viewPost(post: Post) {
