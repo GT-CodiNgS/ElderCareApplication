@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Post } from 'src/app/core/models/Post';
+import { Post, PostGenderType } from 'src/app/core/models/Post';
 
 @Component({
   selector: 'app-view-post',
@@ -9,6 +9,7 @@ import { Post } from 'src/app/core/models/Post';
 })
 export class ViewPostComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: Post) {}
+  PostGenderType = PostGenderType;
 
   post = this.data;
 
