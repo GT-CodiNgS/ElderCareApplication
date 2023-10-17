@@ -59,8 +59,8 @@ export class DashboardComponent implements OnInit {
 
   viewPost(post: Post) {
     let dialogRef = this.dialog.open(ViewPostComponent, {
-      width: '600px',
-      height: 'auto',
+      width: '1022px',
+      height: '650px',
       panelClass: 'model-preview',
       hasBackdrop: true,
       data: post,
