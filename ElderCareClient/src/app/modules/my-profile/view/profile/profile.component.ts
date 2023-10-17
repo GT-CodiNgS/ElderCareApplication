@@ -17,45 +17,37 @@ import {data} from "autoprefixer";
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit{
-
-  selectedUser = new UserUpdate(
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    ''
-  );
+export class ProfileComponent implements OnInit {
+  selectedUser = new UserUpdate('', '', '', '', '', '', '', '');
 
   posts: Post[] = [];
+  filteredPosts: Post[] = [];
+  searchQuery: string = '';
 
-  constructor(public dialog: MatDialog,
-              private userService:UserService,
-              private localStorageService: LocalStorageService) {
-    // this.getUser();
+  constructor(
+    public dialog: MatDialog,
+    private userService: UserService,
+    private localStorageService: LocalStorageService
+  ) {}
 
-    // this.selectedUser = new UserUpdate(
-    //   'User',
-    //   'Name',
-    //   'user@gmail.com',
-    //   '',
-    //   '119',
-    //   'Hikka',
-    //   'Hikka',
-    //   'gayash',
-    // )
+  searchPosts(query: string): void {
+    query = query.trim();
+
+    if (!query) {
+      this.filteredPosts = [...this.posts];
+      return;
+    }
+
+    this.filteredPosts = this.posts.filter((post) =>
+      post.title.toLowerCase().includes(query.toLowerCase())
+    );
   }
-
-
   async getUser() {
     let userId = this.localStorageService.getItem('id');
     let byId = await this.userService.getById(userId);
-    console.log(byId)
+    console.log(byId);
     if (byId) {
-      this.selectedUser = byId
+      this.selectedUser = byId;
     }
   }
 
@@ -76,10 +68,11 @@ export class ProfileComponent implements OnInit{
     this.getUser();
   }
 
-  getPost(){
+  getPost() {
     let userId = this.localStorageService.getItem('id');
     this.postService.getPosts().subscribe((posts) => {
       this.posts = posts;
+      this.filteredPosts = posts;
     });
   }
 
@@ -99,14 +92,13 @@ export class ProfileComponent implements OnInit{
   openEditProfileDialog() {
     let dialogConfig = new MatDialogConfig();
 
-    const dialogRef =
-      this.dialog.open(EditProfileComponent, {
-        width: '500px',
-        height: 'auto',
-        panelClass: 'model-preview',
-        hasBackdrop: true,
-        data: this.selectedUser
-      });
+    const dialogRef = this.dialog.open(EditProfileComponent, {
+      width: '500px',
+      height: 'auto',
+      panelClass: 'model-preview',
+      hasBackdrop: true,
+      data: this.selectedUser,
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
@@ -114,13 +106,12 @@ export class ProfileComponent implements OnInit{
   }
 
   resetPassword() {
-
-      this.dialog.open(PasswordResetComponent, {
-        width: '500px',
-        height: 'auto',
-        panelClass: 'model-preview',
-        hasBackdrop: true,
-      });
+    this.dialog.open(PasswordResetComponent, {
+      width: '500px',
+      height: 'auto',
+      panelClass: 'model-preview',
+      hasBackdrop: true,
+    });
   }
 
   createNewPost() {
@@ -131,45 +122,44 @@ export class ProfileComponent implements OnInit{
       hasBackdrop: true,
     });
 
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().subscribe((res) => {
       this.getPost();
-    })
+    });
   }
 
-  edit(post:Post) {
+  edit(post: Post) {
     let dialogRef = this.dialog.open(AddPostComponent, {
       width: '500px',
       height: 'auto',
       panelClass: 'model-preview',
       hasBackdrop: true,
-      data:post
+      data: post,
     });
 
-    dialogRef.afterClosed().subscribe( res => {
+    dialogRef.afterClosed().subscribe((res) => {
       this.getPost();
-    })
+    });
   }
 
-  view(post:Post) {
+  view(post: Post) {
     let dialogRef = this.dialog.open(ViewPostComponent, {
       width: '600px',
       height: 'auto',
       panelClass: 'model-preview',
       hasBackdrop: true,
-      data:post
+      data: post,
     });
   }
 
-  delete(post:Post) {
-    let matDialogRef = this.dialog.open(
-      ConfirmDialogComponent,
-    {data: {title:'Delete Confirm',message:'Are you sure?' }}
-    );
-    matDialogRef.afterClosed().subscribe(res => {
-      if (res){
-        console.log(res)
+  delete(post: Post) {
+    let matDialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { title: 'Delete Confirm', message: 'Are you sure?' },
+    });
+    matDialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        console.log(res);
         //delete
       }
-    })
+    });
   }
 }
