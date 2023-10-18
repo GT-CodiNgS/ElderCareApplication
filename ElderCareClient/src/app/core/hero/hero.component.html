@@ -5,11 +5,13 @@
       <img class="ml-3" src="../../../assets/img/elder_nav_icon.png" alt="" />
     </div>
     <ul class="flex space-x-4 pr-8">
-      <li><a [routerLink]="'..'" class="text-white">Home</a></li>
+      <li>
+        <a [routerLink]="'..'" class="text-white">{{ "home" | translate }}</a>
+      </li>
       <li>
         <a (click)="navigateToProfile()" class="text-white cursor-pointer"
-          >Profile</a
-        >
+          >{{ "profile" | translate }}
+        </a>
       </li>
 
       <li *ngIf="localStorage.getItem('roleType') == '1'">
@@ -17,7 +19,7 @@
           [routerLink]="'admin-panel'"
           (click)="navigateToAdminPanel()"
           class="text-white cursor-pointer"
-          >Admin Panel</a
+          >{{ "aminpanel" | translate }}</a
         >
       </li>
       <li *ngIf="localStorage.getItem('token')" class="ml-2">
@@ -25,8 +27,17 @@
           disabled
           (click)="logout()"
           class="text-orange-500 pr-3 pl-3 p-1 rounded-sm text-center cursor-pointer"
-          >LOGOUT</a
+          >{{ "logout" | translate }}</a
         >
+      </li>
+      <li>
+        <div>
+          <select [(ngModel)]="selectedLanguage" (change)="changeLanguage()">
+            <option value="en">English</option>
+            <option value="sl">සිංහල</option>
+            <option value="tl">தமிழ்</option>
+          </select>
+        </div>
       </li>
     </ul>
   </nav>
@@ -53,7 +64,7 @@
           color: #c5a332;
         "
       >
-        Hi, Welcome
+        {{ "welcome" | translate }}
       </h2>
       <div class="m-5">
         <div class="mb-10">
@@ -61,14 +72,10 @@
             style="font-family: Playfair Display, serif"
             class="text-lg text-black mb-2"
           >
-            About Us
+            {{ "about" | translate }}
           </h1>
           <p style="font-family: Playfair Display, serif" class="text-justify">
-            Welcome to the Elder Care App, the platform you can trust for
-            comprehensive elder care solutions. Our aim is to combine compassion
-            and cutting-edge technology to serve the unique needs of our senior
-            community. We are dedicated to ensuring the well-being and comfort
-            of every elder and individual requiring care.
+            {{ "abouttext" | translate }}
           </p>
           <h1 class="text-lg text-black mb-2"></h1>
           <p></p>

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorageService } from '../services/local-storage.service';
 import { Observable, delay, of, switchMap } from 'rxjs';
 import { LoadingService } from '../services/loading.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hero',
@@ -16,21 +17,28 @@ export class HeroComponent implements OnInit {
   loading = false;
   loginUser: boolean = false;
   isLoading$!: Observable<boolean>;
+  selectedLanguage!: string;
 
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
     public router: Router,
     public localStorage: LocalStorageService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private translate: TranslateService
   ) {
     this.isLoading$ = this.loadingService.loading$;
-
-    console.log(this.router.url == '/url');
-    console.log(this.router.url == '/hero/my-profile');
+    this.selectedLanguage = localStorage.getLangItem('language') || 'en';
+    console.log(this.selectedLanguage);
+    this.translate.use(this.selectedLanguage);
   }
 
   ngOnInit(): void {}
+
+  changeLanguage() {
+    this.translate.use(this.selectedLanguage);
+    localStorage.setItem('language', this.selectedLanguage);
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
