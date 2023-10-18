@@ -1,0 +1,58 @@
+version: '3.4'
+
+services:
+  web:
+    image: ghcr.io/gt-codings/elder-care-client:latest
+    build:
+      context: .
+      dockerfile: ./ElderCareClient/Dockerfile
+    ports:
+      - "80:80"
+  
+  api:
+    image: ghcr.io/gt-codings/edler-care-api:latest
+    build:
+      context: .
+      dockerfile: ./EdlerCareApi/Dockerfile
+    ports:
+      - "7177:7177"
+    environment:
+      DBPostgreSQL__ConnectionString__Host: "db"
+      DBPostgreSQL__ConnectionString__Port: "5432"
+      DBPostgreSQL__ConnectionString__Database: "ElderCare"
+      DBPostgreSQL__ConnectionString__Username: "Gayas"
+      DBPostgreSQL__ConnectionString__Password: "Gayas123"
+      EmailSettings__apiUrl: "http://11.1.1.1:7177"
+    depends_on:
+      - db
+  
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: 'ElderCare'
+      POSTGRES_USER: 'Gayas'
+      POSTGRES_PASSWORD: 'Gayas123'
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  db_migrator:
+    image: ghcr.io/gt-codings/edler-care-db-migrator:latest
+    build:
+      context: .
+      dockerfile: ./EdlerCareDbMigrator/Dockerfile
+    working_dir: /app
+    #command: ["bash", "-c", "dotnet ef database update --context ElderCareDbContext --project EdlerCareApi/EdlerCareApi.csproj --startup-project EdlerCareApi/EdlerCareApi.csproj --verbose"]
+    command: ["sleep", "100000"]
+    environment:
+      DBPostgreSQL__ConnectionString__Host: "db"
+      DBPostgreSQL__ConnectionString__Port: "5432"
+      DBPostgreSQL__ConnectionString__Database: "ElderCare"
+      DBPostgreSQL__ConnectionString__Username: "Gayas"
+      DBPostgreSQL__ConnectionString__Password: "Gayas123"
+    volumes:
+      - ./EdlerCareApi:/app
+
+volumes:
+  db_data:
