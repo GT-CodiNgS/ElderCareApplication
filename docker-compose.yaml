@@ -43,8 +43,7 @@ services:
       context: .
       dockerfile: ./EdlerCareDbMigrator/Dockerfile
     working_dir: /app
-    #command: ["bash", "-c", "dotnet ef database update --context ElderCareDbContext --project EdlerCareApi/EdlerCareApi.csproj --startup-project EdlerCareApi/EdlerCareApi.csproj --verbose"]
-    command: ["sleep", "100000"]
+    command: ["bash", "-c", "dotnet ef database update"]
     environment:
       DBPostgreSQL__ConnectionString__Host: "db"
       DBPostgreSQL__ConnectionString__Port: "5432"
