@@ -72,6 +72,7 @@
         font-size: 35px;
         font-weight: bold;
       "
+      [ngClass]="currentLanguage"
     >
       🎉{{ "win" | translate }}🎉
     </h1>
@@ -82,12 +83,13 @@
         font-weight: normal;
         font-family: Playfair Display, serif;
       "
+      [ngClass]="currentLanguage"
     >
       {{ "cashprice" | translate }}
     </h1>
     <span
       style="font-family: Playfair Display, serif"
-      class="mt-3 mb-3 text-justify"
+      class="mt-3 mb-3 text-left"
     >
       {{ "cashpricetext" | translate }}
 

@@ -12,5 +12,15 @@
   "win": "Win",
   "cashprice":"CASH PRICE",
   "cashpricetext": "The most engaged user stands a chance to WIN special privileges and rewards. Share, care, and connect more with our elder community to claim your spot at the top! Let's make caring contagious.",
-  "eldercarechampion":"#EldercareChampion"
+  "eldercarechampion":"#EldercareChampion",
+  "signin": "Sign In",
+  "signup": "Sign Up",
+  "forgotpassword": "Forgot Password",
+  "rememberme": "Remember Me",
+  "forsigup": "Don't have an account? Sign Up",
+  "forsigin": "Already have an account? Sign In",
+  "pleaseenterusername": "Please enter user name",
+  "pleaseenterpassword": "Please enter password",
+  "password": "Password",
+  "username": "User Name"
 }

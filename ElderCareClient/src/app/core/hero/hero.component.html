@@ -55,28 +55,26 @@
   <mat-drawer class="side-bar" mode="side" opened>
     <div class="col-span-1">
       <img src="../../../../../assets/home/nav-bar-img.png" alt="" />
-      <h2
-        class="welcome-text"
-        style="
-          font-weight: bold;
-          font-size: 25px;
-          font-family: Playfair Display, serif;
-          color: #c5a332;
-        "
-      >
+      <h2 style="font-family: Playfair Display, serif" class="welcome-text" [ngClass]="currentLanguage">
         {{ "welcome" | translate }}
       </h2>
       <div class="m-5">
         <div class="mb-10">
           <h1
             style="font-family: Playfair Display, serif"
-            class="text-lg text-black mb-2"
+            class="text-lg text-black mb-2 "
           >
             {{ "about" | translate }}
           </h1>
-          <p style="font-family: Playfair Display, serif" class="text-justify">
+          <span
+            style="
+              font-family: Playfair Display, serif;
+              color: black !important;
+            "
+            class="text-left"
+          >
             {{ "abouttext" | translate }}
-          </p>
+          </span>
           <h1 class="text-lg text-black mb-2"></h1>
           <p></p>
         </div>

@@ -11,9 +11,10 @@
         ></mat-progress-bar>
 
         <div>
-          <h2 class="mt-6 text-center text-3xl font-serif text-gray-900">
-            {{ isSignInForm ? "Sign In" : "Sign Up" }}
-          </h2>
+          <h2
+            class="mt-6 text-center text-3xl font-serif text-gray-900"
+            [translate]="isSignInForm ? 'signin' : 'signup'"
+          ></h2>
         </div>
         <!-- Sign In Form -->
         <div class="" *ngIf="isSignInForm; else signUpForm">
@@ -27,12 +28,14 @@
                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
               />
-              <mat-error *ngIf="checkSingInError('userName', 'required')"
-                >Please enter user name</mat-error
+              <mat-error *ngIf="checkSingInError('userName', 'required')">
+                {{ "pleaseenterusername" | translate }}</mat-error
               >
             </div>
             <div class="mt-3">
-              <label for="password" class="sr-only">Password</label>
+              <label for="password" class="sr-only">{{
+                "password" | translate
+              }}</label>
               <input
                 id="password"
                 formControlName="password"
@@ -40,9 +43,9 @@
                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
-              <mat-error *ngIf="checkSingInError('password', 'required')"
-                >Please enter password</mat-error
-              >
+              <mat-error *ngIf="checkSingInError('password', 'required')">{{
+                "pleaseenterpassword" | translate
+              }}</mat-error>
             </div>
             <div class="mt-5 mb-4 flex items-center justify-between">
               <div class="flex items-center">
@@ -55,13 +58,13 @@
                   for="remember-me"
                   class="ml-2 block text-sm text-gray-900"
                 >
-                  Remember me
+                  {{ "rememberme" | translate }}
                 </label>
               </div>
 
               <div class="text-sm">
                 <a class="font-medium text-indigo-600 hover:text-indigo-500">
-                  Forgot your password?
+                  {{ "forgotpassword" | translate }}
                 </a>
               </div>
             </div>
@@ -71,7 +74,7 @@
                 type="submit"
                 class="mb-1 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Sign In
+                {{ "signin" | translate }}
               </button>
             </div>
           </form>
@@ -207,7 +210,7 @@
                   type="submit"
                   class="mb-1 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Sign Up
+                  {{ "signup" | translate }}
                 </button>
               </div>
             </ng-template>
@@ -220,11 +223,7 @@
             (click)="toggleForm()"
             class="text-indigo-600 hover:text-indigo-500"
           >
-            {{
-              isSignInForm
-                ? "Don't have an account? Sign Up"
-                : "Already have an account? Sign In"
-            }}
+            {{ (isSignInForm ? "forsigup" : "forsigin") | translate }}
           </button>
         </div>
       </div>

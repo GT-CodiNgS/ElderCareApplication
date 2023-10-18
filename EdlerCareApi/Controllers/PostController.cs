@@ -24,7 +24,7 @@ namespace EdlerCareApi.Controllers
             return Created(addedPost);
         }
 
-        [HttpGet]
+        [HttpGet,AllowAnonymous]
         public ActionResult<IQueryable<Post>> GetAllPosts()
         {
             IQueryable<Post> posts = this.postService.RetriveAllActivePosts();

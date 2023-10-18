@@ -18,6 +18,7 @@ export class HeroComponent implements OnInit {
   loginUser: boolean = false;
   isLoading$!: Observable<boolean>;
   selectedLanguage!: string;
+  currentLanguage!: string;
 
   constructor(
     public dialog: MatDialog,
@@ -29,15 +30,22 @@ export class HeroComponent implements OnInit {
   ) {
     this.isLoading$ = this.loadingService.loading$;
     this.selectedLanguage = localStorage.getLangItem('language') || 'en';
-    console.log(this.selectedLanguage);
     this.translate.use(this.selectedLanguage);
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.translate.onLangChange.subscribe((event) => {
+      this.currentLanguage = event.lang;
+    });
+    this.currentLanguage = this.translate.currentLang || 'en';
+  }
 
   changeLanguage() {
+    this.currentLanguage = this.selectedLanguage;
     this.translate.use(this.selectedLanguage);
     localStorage.setItem('language', this.selectedLanguage);
+    console.log(this.currentLanguage);
+    
   }
 
   openDialog(): void {

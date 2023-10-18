@@ -11,6 +11,7 @@ import { PostService } from 'src/app/core/services/post.service';
 import { AddPostComponent } from '../../../add-post/add-post.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewPostComponent } from './inner-components/view-post/view-post.component';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-home',
   templateUrl: './dashboard.component.html',
@@ -29,6 +30,7 @@ export class DashboardComponent implements OnInit {
   itemsPerPage = 5;
   currentPage = 1;
   PostGenderType = PostGenderType;
+  currentLanguage!: string;
 
   posts: Post[] = [];
   filteredPosts: Post[] = [];
@@ -43,9 +45,13 @@ export class DashboardComponent implements OnInit {
   colorState: string = 'red';
   postService = inject(PostService);
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private translate: TranslateService) {}
 
   ngOnInit(): void {
+    this.translate.onLangChange.subscribe((event) => {
+      this.currentLanguage = event.lang;
+    });
+    this.currentLanguage = this.translate.currentLang || 'en';
     this.postService.getPosts().subscribe((posts) => {
       this.posts = posts;
       this.filteredPosts = posts;
@@ -60,10 +66,10 @@ export class DashboardComponent implements OnInit {
   }
 
   searchPosts(query: string): void {
-    query = query.trim(); 
+    query = query.trim();
 
     if (!query) {
-      this.filteredPosts = [...this.posts]; 
+      this.filteredPosts = [...this.posts];
       return;
     }
 
