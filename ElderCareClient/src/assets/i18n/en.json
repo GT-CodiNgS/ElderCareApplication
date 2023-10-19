@@ -7,7 +7,7 @@
   "profile": "Profile",
   "aminpanel": "Admin Panel",
   "logout": "Logout",
-  "search": "Search",
+  "search": "SEARCH",
   "searchText": "Search for a service",
   "win": "Win",
   "cashprice":"CASH PRICE",
@@ -22,5 +22,14 @@
   "pleaseenterusername": "Please enter user name",
   "pleaseenterpassword": "Please enter password",
   "password": "Password",
-  "username": "User Name"
+  "username": "User Name",
+  "firstname": "First Name",
+  "lastname": "Last Name",
+  "contactno": "Contact No.",
+  "email": "Email.",
+  "address": "Address",
+  "city": "City",
+  "addnewpost": "Add New Post",
+  "edit": "Edit",
+  "resetpassword": "Change Password"
 }

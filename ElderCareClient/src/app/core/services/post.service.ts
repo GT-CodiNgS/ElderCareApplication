@@ -38,4 +38,8 @@ export class PostService implements OnInit {
   deletePost(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}Post/${id}`);
   }
+
+  getPostsByUserId(id: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}Post/user/${id}`);
+  }
 }

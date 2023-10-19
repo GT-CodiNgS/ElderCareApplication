@@ -51,5 +51,12 @@ namespace EdlerCareApi.Controllers
             Post removedPost = await this.postService.RemovePostAsync(postId);
             return Ok(removedPost);
         }
+
+        [HttpGet("user/{userId}")]
+        public ActionResult<IQueryable<Post>> GetAllPostsByUserId(Guid userId)
+        {
+            IQueryable<Post> posts = this.postService.RetriveAllActivePostsByUserId(userId);
+            return Ok(posts);
+        }
     }
 }

@@ -45,7 +45,6 @@ export class ProfileComponent implements OnInit {
   async getUser() {
     let userId = this.localStorageService.getItem('id');
     let byId = await this.userService.getById(userId);
-    console.log(byId);
     if (byId) {
       this.selectedUser = byId;
     }
@@ -70,9 +69,9 @@ export class ProfileComponent implements OnInit {
 
   getPost() {
     let userId = this.localStorageService.getItem('id');
-    this.postService.getPosts().subscribe((posts) => {
-      this.posts = posts;
-      this.filteredPosts = posts;
+    this.postService.getPostsByUserId(userId).subscribe((res) => {
+      this.posts = res;
+      this.filteredPosts = res;
     });
   }
 
@@ -153,12 +152,12 @@ export class ProfileComponent implements OnInit {
 
   delete(post: Post) {
     let matDialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: { title: 'Delete Confirm', message: 'Are you sure?' },
+      data: { post: post, title: 'Delete Confirm', message: 'Are you sure?' },
     });
     matDialogRef.afterClosed().subscribe((res) => {
       if (res) {
         console.log(res);
-        //delete
+        this.getPost();
       }
     });
   }

@@ -53,16 +53,27 @@
 
 <mat-drawer-container class="drawer-container">
   <mat-drawer class="side-bar" mode="side" opened>
-    <div class="col-span-1">
+    <div
+      *ngIf="
+        router.url !== '/hero/admin-panel' &&
+        router.url !== '/hero/admin-panel/post' &&
+        router.url !== '/hero/admin-panel/user'
+      "
+      class="col-span-1"
+    >
       <img src="../../../../../assets/home/nav-bar-img.png" alt="" />
-      <h2 style="font-family: Playfair Display, serif" class="welcome-text" [ngClass]="currentLanguage">
+      <h2
+        style="font-family: Playfair Display, serif"
+        class="welcome-text"
+        [ngClass]="currentLanguage"
+      >
         {{ "welcome" | translate }}
       </h2>
       <div class="m-5">
         <div class="mb-10">
           <h1
             style="font-family: Playfair Display, serif"
-            class="text-lg text-black mb-2 "
+            class="text-lg text-black mb-2"
           >
             {{ "about" | translate }}
           </h1>
@@ -78,7 +89,7 @@
           <h1 class="text-lg text-black mb-2"></h1>
           <p></p>
         </div>
-        <div *ngIf="router.url == '/url'" class="filters-checks">
+        <!-- <div *ngIf="router.url == '/url'" class="filters-checks">
           <h3>Filter By</h3>
           <div class="form-check m-3">
             <input type="checkbox" class="form-check-input" id="priceLowest" />
@@ -98,7 +109,7 @@
             <input type="checkbox" class="form-check-input" id="location" />
             <label class="form-check-label" for="location">Location</label>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -108,7 +119,7 @@
         router.url !== '/hero' &&
         router.url !== '/hero/my-profile'
       "
-      class="menu"
+      class="menu mt-8"
     >
       <button [routerLink]="'/hero/admin-panel/post'" mat-raised-button>
         Post

@@ -2,7 +2,10 @@
   <div class="container mx-auto my-5 p-5">
     <div class="md:flex no-wrap md:-mx-2">
       <div class="w-full md:w-3/12 md:mx-2">
-        <div class="bg-white p-3 border-t-4 border-green-400 pro-sec">
+        <div
+          style="background-color: aliceblue"
+          class="rounded shadow-black  shadow-sm bg-white p-3 border-t-4 border-green-400 pro-sec"
+        >
           <div class="image overflow-hidden profile-img-sec">
             <img
               style="width: 42%"
@@ -18,7 +21,10 @@
         <div class="my-4"></div>
       </div>
       <div class="w-full h-64">
-        <div class="bg-white p-3 shadow-sm rounded-sm">
+        <div
+          style="background-color: aliceblue"
+          class="bg-white p-3 rounded shadow-black shadow-sm"
+        >
           <div
             class="flex justify-between items-center space-x-2 font-semibold text-gray-900 leading-8"
           >
@@ -39,52 +45,64 @@
                   />
                 </svg>
               </span>
-              <span class="tracking-wide">About</span>
+              <span class="tracking-wide">{{ "about" | translate }}</span>
             </div>
             <div>
               <button
-                style="background-color: cadetblue"
+                style="background-color: darkgray"
                 (click)="openEditProfileDialog()"
-                class="active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                class="rounded shadow-black shadow-sm uppercase text-white font-bold hover:opacity-60 text-xs px-4 py-2 outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                 type="button"
               >
-                Edit
+                {{ "edit" | translate }}
               </button>
               <button
                 (click)="resetPassword()"
-                class="bg-cyan-800 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                class="bg-cyan-800 uppercase text-white font-bold rounded shadow-black shadow-sm hover:opacity-60 text-xs px-4 py-2 outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                 type="button"
               >
-                Reset Password
+                {{ "resetpassword" | translate }}
               </button>
             </div>
           </div>
           <div class="text-gray-700">
             <div class="grid md:grid-cols-2 text-sm">
               <div class="grid grid-cols-2">
-                <div class="px-4 py-2 font-semibold">First Name</div>
+                <div class="px-4 py-2 font-semibold">
+                  {{ "firstname" | translate }}
+                </div>
                 <div class="px-4 py-2">{{ selectedUser.firstName }}</div>
               </div>
               <div class="grid grid-cols-2">
-                <div class="px-4 py-2 font-semibold">Last Name</div>
+                <div class="px-4 py-2 font-semibold">
+                  {{ "lastname" | translate }}
+                </div>
                 <div class="px-4 py-2">{{ selectedUser.lastName }}</div>
               </div>
               <div class="grid grid-cols-2">
-                <div class="px-4 py-2 font-semibold">Contact No.</div>
+                <div class="px-4 py-2 font-semibold">
+                  {{ "contactno" | translate }}
+                </div>
                 <div class="px-4 py-2">{{ selectedUser.phone }}</div>
               </div>
               <div class="grid grid-cols-2">
-                <div class="px-4 py-2 font-semibold">Address</div>
+                <div class="px-4 py-2 font-semibold">
+                  {{ "address" | translate }}
+                </div>
                 <div class="px-4 py-2">{{ selectedUser.address }}</div>
               </div>
               <div class="grid grid-cols-2">
-                <div class="px-4 py-2 font-semibold">Email.</div>
+                <div class="px-4 py-2 font-semibold">
+                  {{ "email" | translate }}
+                </div>
                 <div class="px-4 py-2">
                   <a class="text-blue-800">{{ selectedUser.email }}</a>
                 </div>
               </div>
               <div class="grid grid-cols-2">
-                <div class="px-4 py-2 font-semibold">City</div>
+                <div class="px-4 py-2 font-semibold">
+                  {{ "city" | translate }}
+                </div>
                 <div class="px-4 py-2">{{ selectedUser.city }}</div>
               </div>
             </div>
@@ -98,7 +116,7 @@
   <div class="grid mt-5 h-screen main-sec">
     <div class="col-span-4 post-sec">
       <div class="top-sec items-center">
-        <div style="width: 80%" class="search-container mr-4 ml-4">
+        <div style="width: 50%" class="search-container mr-4 ml-4">
           <input
             (input)="searchPosts(searchInput.value)"
             #searchInput
@@ -110,16 +128,16 @@
             class="search-button"
             (click)="searchPosts(searchInput.value)"
           >
-            Search
+            {{ "search" | translate }}
           </button>
         </div>
         <button
-          style="height: 38px"
+          style="height: 38px; background-color: cadetblue"
           (click)="createNewPost()"
-          class="bg-green-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+          class="bg-green-500 uppercase text-white font-bold shadow-black shadow-sm hover:opacity-60 text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
           type="button"
         >
-          Add New Post
+          {{ "addnewpost" | translate }}
         </button>
       </div>
       <div class="grid grid-rows-1 md:grid-rows-2 lg:grid-rows-3 gap-4 p-5">

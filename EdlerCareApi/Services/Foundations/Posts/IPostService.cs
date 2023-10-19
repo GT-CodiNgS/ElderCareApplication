@@ -9,5 +9,6 @@ namespace EdlerCareApi.Services.Foundations.Posts
         ValueTask<Post> ModifyPostAsync(Post post);
         ValueTask<Post> RemovePostAsync(Guid postId);
         IQueryable<Post> RetriveAllActivePosts();
+        IQueryable<Post> RetriveAllActivePostsByUserId(Guid userId);
     }
 }

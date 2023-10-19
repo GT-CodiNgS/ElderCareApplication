@@ -77,7 +77,21 @@ namespace EdlerCareApi.Services.Foundations.Posts
         {
             try
             {
-                return this.storageBroker.SelectAllPosts();
+                return this.storageBroker.SelectAllPosts().Where(u => !u.IsDeleted);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public IQueryable<Post> RetriveAllActivePostsByUserId(Guid userId)
+        {
+            try
+            {
+                return this.storageBroker.SelectAllPosts().Where(u => u.CreatedBy == userId);
 
             }
             catch (Exception)

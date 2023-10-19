@@ -22,5 +22,14 @@
   "pleaseenterusername": "தயவுசெய்து பயனர் பெயரை உள்ளிடவும்",
   "pleaseenterpassword": "தயவுசெய்து கடவுச்சொல்லை உள்ளிடவும்",
   "password": "கடவுச்சொல்",
-  "username": "பயனர்பெயர்"
+  "username": "பயனர்பெயர்",
+  "firstname": "முதல் பெயர்",
+  "lastname": "கடைசி பெயர்",
+  "contactno": "தொடர்பு எண்",
+  "email": "மின்னஞ்சல்.",
+  "address": "முகவரி",
+  "city": "நகரம்",
+  "addnewpost": "புதிய இடுகை சேர்",
+  "edit": "திருத்து",
+  "resetpassword": "கடவுச்சொல்லை மீட்டமை"
 }

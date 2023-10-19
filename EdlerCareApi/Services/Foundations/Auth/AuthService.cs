@@ -78,13 +78,13 @@ namespace EdlerCareApi.Services.Foundations.Auth
             throw new NotImplementedException();
         }
 
-        public bool IsPasswordReset(PasswordResetDto passwordResetDto)
+        public bool PasswordChange(PasswordResetDto passwordResetDto)
         {
             try
             {
-                UserProfile maybeUserProfile = 
+                UserProfile maybeUserProfile =
                     this.storageBroker.SelectUserProfileByIdAsync(new Guid(passwordResetDto.userId)).Result;
-    
+
                 if (maybeUserProfile is null)
                 {
                     return false;
@@ -103,7 +103,7 @@ namespace EdlerCareApi.Services.Foundations.Auth
                 maybeUserProfile.UpdatedDate = DateTime.UtcNow;
                 maybeUserProfile.TokenCreated = DateTime.UtcNow;
 
-                ValueTask<UserProfile> updatedUserProfile 
+                ValueTask<UserProfile> updatedUserProfile
                     = this.storageBroker.UpdateUserProfileAsync(maybeUserProfile);
 
                 return true;
@@ -218,6 +218,46 @@ namespace EdlerCareApi.Services.Foundations.Auth
         public ValueTask<UserDto> RefreshTokenAsync(UserDto user)
         {
             throw new NotImplementedException();
+        }
+
+        public bool ForgotPassword()
+        {
+            UserProfile loggedUser = this.userProfileService.GetLoggedUserId().Result;
+            if (loggedUser != null)
+            {
+                string randomPassword = Guid.NewGuid().ToString().Substring(0, 8);
+                CreatePasswordHash(randomPassword, out byte[] passwordHash, out byte[] passwordSalt);
+
+                UserProfile mayBeUser = this.userProfileService.RetrieveUserProfileByIdAsync(loggedUser.Id).Result;
+                if (mayBeUser != null)
+                {
+                    mayBeUser.PasswordHash = passwordHash;
+                    mayBeUser.PasswordSalt = passwordSalt;
+                    mayBeUser.UpdatedDate = DateTime.UtcNow;
+
+                    ValueTask<UserProfile> updatedUserProfile
+                        = this.storageBroker.UpdateUserProfileAsync(mayBeUser);
+
+                    if (updatedUserProfile.IsCompletedSuccessfully)
+                    {
+                        string apiUrl = _emailSettings.ApiUrl;
+
+                        var emailBody = $"Your new password is {randomPassword}.";
+
+                        bool isEmailSent = this.emailService.SendEmailAsync(
+                             mayBeUser.Username,
+                             mayBeUser.Email,
+                             "Forgot Password",
+                             emailBody).Result;
+
+                        if (isEmailSent)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
     }
 }
