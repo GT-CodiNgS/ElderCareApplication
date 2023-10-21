@@ -65,7 +65,7 @@ export class AddPostComponent implements OnInit {
       this.postService
         .addPost(
           new Post(
-            '',
+            'e24f163d-7f76-4dc2-9f0f-0a18a1b7e584',
             this.detailsForm.get('title')?.value,
             this.detailsForm.get('description')?.value,
             this.detailsForm.get('postGenderType')?.value,
