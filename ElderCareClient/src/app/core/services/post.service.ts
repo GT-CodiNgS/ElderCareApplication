@@ -21,22 +21,29 @@ export class PostService implements OnInit {
     return this.http.get<any[]>(`${this.apiUrl}Post`);
   }
 
+  getAllPosts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}Post/admin`);
+  }
+
   getPostById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}Post/${id}`);
   }
 
   addPost(post: Post): Observable<any> {
-    console.log(post);
-
     return this.http.post<any>(`${this.apiUrl}Post`, post);
   }
 
-  updatePost(id: number, post: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}Post/${id}`, post);
+  updatePost(post: Post): Observable<any> {
+    console.log(post);
+    return this.http.put(`${this.apiUrl}Post`, post);
   }
 
   deletePost(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}Post/${id}`);
+  }
+
+  verifyPost(id: number): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}Post/verify/${id}`, {});
   }
 
   getPostsByUserId(id: string): Observable<any[]> {

@@ -10,7 +10,7 @@ import { LocalStorageService } from '../../../../core/services/local-storage.ser
 import { PasswordResetComponent } from './inner-components/password-reset/password-reset.component';
 import { ViewPostComponent } from '../../../home/view/home/inner-components/view-post/view-post.component';
 import { ConfirmDialogComponent } from '../../../../core/dialog/confirm-dialog/confirm-dialog.component';
-import { data } from 'autoprefixer';
+import { UpdatePostComponent } from 'src/app/modules/update-post/update-post.component';
 
 @Component({
   selector: 'app-profile',
@@ -19,6 +19,7 @@ import { data } from 'autoprefixer';
 })
 export class ProfileComponent implements OnInit {
   selectedUser = new UserUpdate('', '', '', '', '', '', '', '');
+  PostGenderType = PostGenderType;
 
   posts: Post[] = [];
   filteredPosts: Post[] = [];
@@ -42,6 +43,20 @@ export class ProfileComponent implements OnInit {
       post.title.toLowerCase().includes(query.toLowerCase())
     );
   }
+
+  searchPostsByVerify(query: string): void {
+    query = query.trim();
+
+    if (!query) {
+      this.filteredPosts = [...this.posts];
+      return;
+    }
+
+    this.filteredPosts = this.posts.filter((post) =>
+      post.title.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
   async getUser() {
     let userId = this.localStorageService.getItem('id');
     let byId = await this.userService.getById(userId);
@@ -127,7 +142,7 @@ export class ProfileComponent implements OnInit {
   }
 
   edit(post: Post) {
-    let dialogRef = this.dialog.open(AddPostComponent, {
+    let dialogRef = this.dialog.open(UpdatePostComponent, {
       width: '1022px',
       height: 'auto',
       panelClass: 'model-preview',

@@ -44,7 +44,7 @@ namespace EdlerCareApi.Controllers
             return Ok(modifiedUser);
         }
 
-        [HttpDelete("{UserId}")]
+        [HttpDelete("{userProfileId}")]
         public async ValueTask<ActionResult<UserProfile>> ModifyUserProfileToRemoveAsync(Guid userProfileId)
         {
             UserProfile removedUser = await this.userService.RemoveUserProfileAsync(userProfileId);

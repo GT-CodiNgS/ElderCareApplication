@@ -17,6 +17,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TranslateModule } from '@ngx-translate/core';
+import { UpdatePostComponent } from 'src/app/modules/update-post/update-post.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { TranslateModule } from '@ngx-translate/core';
     HomeComponent,
     LoginComponent,
     AddPostComponent,
+    UpdatePostComponent,
   ],
   imports: [
     CommonModule,

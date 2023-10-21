@@ -21,10 +21,18 @@
         <div>
           <div style="height: 220px; font-family: Playfair Display, serif">
             <h2 style="font-size: 30px" class="font-bold">
-              {{ post.title }}
+              {{
+                post.title.length > 60
+                  ? post.title.slice(0, 60) + "..."
+                  : post.title
+              }}
             </h2>
             <p style="font-size: 20px" class="text-gray-500">
-              {{ post.description }}
+              {{
+                post.description.length > 100
+                  ? post.description.slice(0, 100) + "..."
+                  : post.description
+              }}
             </p>
 
             <div class="flex justify-between mt-3">
@@ -32,7 +40,11 @@
                 style="font-size: 16px; font-family: Playfair Display, serif"
                 class="text-gray-600"
               >
-                {{ post.body }}
+                {{
+                  post.body.length > 700
+                    ? post.body.slice(0, 700) + "..."
+                    : post.body
+                }}
               </p>
             </div>
           </div>

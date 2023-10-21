@@ -45,7 +45,6 @@ export class HeroComponent implements OnInit {
     this.translate.use(this.selectedLanguage);
     localStorage.setItem('language', this.selectedLanguage);
     console.log(this.currentLanguage);
-    
   }
 
   openDialog(): void {
@@ -65,7 +64,6 @@ export class HeroComponent implements OnInit {
         if (loading) {
           return of(true);
         } else {
-          // Delay the hiding of progress bar by 1s (or however long your animation takes)
           return of(false).pipe(delay(1000));
         }
       })

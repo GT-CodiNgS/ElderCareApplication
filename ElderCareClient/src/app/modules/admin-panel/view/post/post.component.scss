@@ -44,6 +44,38 @@ table {
 }
 
 .mat-mdc-header-row {
-    background: #d1d1d1;
-    color: #060606;
+  background: #d1d1d1;
+  color: #060606;
 }
+
+.bg-success {
+  background-color: transparent !important;
+  border: 1px solid rgb(122, 185, 122) !important;
+  color: rgb(122, 185, 122);
+}
+
+.bg-danger {
+  background-color: transparent !important;
+  border: 1px solid rgb(233, 145, 145) !important;
+  color: rgb(233, 145, 145);
+}
+
+.bg-success-delete {
+  background-color: transparent !important;
+  border: 1px solid rgb(2, 90, 2) !important;
+  color: rgb(122, 185, 122);
+}
+
+.bg-danger-delete {
+  background-color: transparent !important;
+  border: 1px solid rgb(140, 3, 3) !important;
+  color: rgb(233, 145, 145);
+}
+
+mat-chip {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 21px !important;
+}
+

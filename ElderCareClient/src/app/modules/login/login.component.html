@@ -5,11 +5,6 @@
   >
     <div class="flex items-center justify-center bg-gray-100">
       <div class="max-w-sm w-96 space-y-4">
-        <mat-progress-bar
-          *ngIf="apiLoading"
-          mode="indeterminate"
-        ></mat-progress-bar>
-
         <div>
           <h2
             class="mt-6 text-center text-3xl font-serif text-gray-900"
@@ -94,7 +89,7 @@
                   placeholder="First Name"
                 />
                 <mat-error *ngIf="checkUpError('firstName', 'required')"
-                  >Required</mat-error
+                  >Please enter first name</mat-error
                 >
               </div>
               <div>
@@ -107,7 +102,7 @@
                   placeholder="Last Name"
                 />
                 <mat-error *ngIf="checkUpError('lastName', 'required')"
-                  >Required</mat-error
+                  >Please enter last name</mat-error
                 >
               </div>
               <div>
@@ -119,7 +114,7 @@
                   placeholder="User Name"
                 />
                 <mat-error *ngIf="checkUpError('userName', 'required')"
-                  >Required</mat-error
+                  >Please enter username</mat-error
                 >
               </div>
               <div>
@@ -132,7 +127,7 @@
                   placeholder="Email address"
                 />
                 <mat-error *ngIf="checkUpError('email', 'required')"
-                  >Required</mat-error
+                  >Please enter email</mat-error
                 >
               </div>
               <div>
@@ -146,7 +141,7 @@
                   placeholder="Mobile"
                 />
                 <mat-error *ngIf="checkUpError('mobile', 'required')"
-                  >Required</mat-error
+                  >Please enter mobile</mat-error
                 >
               </div>
               <div>
@@ -159,8 +154,8 @@
                   placeholder="Address"
                 />
                 <mat-error *ngIf="checkUpError('address', 'required')"
-                  >Required</mat-error
-                >
+                  >Please enter address
+                </mat-error>
               </div>
               <div>
                 <label for="city" class="sr-only">City</label>
@@ -172,7 +167,7 @@
                   placeholder="City"
                 />
                 <mat-error *ngIf="checkUpError('city', 'required')"
-                  >Required</mat-error
+                  >Please enter city</mat-error
                 >
               </div>
               <div>
@@ -185,11 +180,13 @@
                   placeholder="Password"
                 />
                 <mat-error *ngIf="checkUpError('password', 'required')"
-                  >Required</mat-error
-                >
+                  >Please enter password
+                </mat-error>
               </div>
               <div>
-                <label for="confirmedPassword" class="sr-only">Re-Password</label>
+                <label for="confirmedPassword" class="sr-only"
+                  >Re-password</label
+                >
                 <input
                   id="confirmedPassword"
                   formControlName="confirmedPassword"
@@ -199,7 +196,7 @@
                   placeholder="Re-Password"
                 />
                 <mat-error *ngIf="checkUpError('confirmedPassword', 'required')"
-                  >Required</mat-error
+                  >Please enter re-Password</mat-error
                 >
               </div>
               <div>

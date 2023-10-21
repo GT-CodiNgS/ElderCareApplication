@@ -33,7 +33,19 @@ export class UserService {
     });
   }
 
-  resetPassword(dto: PasswordReset): Observable<any> {
+  changePassword(dto: PasswordReset): Observable<any> {
     return this.httpClient.post(this.apiUrl + 'change-password', dto);
+  }
+
+  getAllUsers(): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.apiUrl}UserProfile`);
+  }
+
+  removeUser(id: string): Observable<any> {
+    return this.httpClient.delete(`${this.apiUrl}UserProfile/${id}`);
+  }
+
+  resetPassword(email: string): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}forgot-password/${email}`);
   }
 }

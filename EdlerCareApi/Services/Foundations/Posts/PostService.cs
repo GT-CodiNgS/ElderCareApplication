@@ -1,5 +1,6 @@
 ﻿using EdlerCareApi.Brokers;
 using EdlerCareApi.Models.Post;
+using EdlerCareApi.Models.Post.Exceptions;
 
 namespace EdlerCareApi.Services.Foundations.Posts
 {
@@ -30,8 +31,42 @@ namespace EdlerCareApi.Services.Foundations.Posts
         {
             try
             {
+                Post mayBePost = await this.storageBroker.SelectPostByIdAsync(post.Id);
+
+                if (mayBePost == null)
+                {
+                    throw new PostNotFoundException();
+                }
+
+                post.CreatedDate = mayBePost.CreatedDate;
+                post.CreatedBy = mayBePost.CreatedBy;
+                post.UpdatedDate = DateTime.UtcNow;
+                post.IsVerified = mayBePost.IsVerified;
+                post.IsDeleted = mayBePost.IsDeleted;
+                post.Status = mayBePost.Status;
+
                 return await this.storageBroker.UpdatePostAsync(post);
 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async ValueTask<Post> VerifyPostAsync(Guid postId)
+        {
+            try
+            {
+                Post verfieddPost = await this.storageBroker.SelectPostByIdAsync(postId);
+
+                if (verfieddPost != null)
+                {
+                    verfieddPost.IsVerified = true;
+                }
+
+                return await this.storageBroker.UpdatePostAsync(verfieddPost);
             }
             catch (Exception)
             {
@@ -77,7 +112,7 @@ namespace EdlerCareApi.Services.Foundations.Posts
         {
             try
             {
-                return this.storageBroker.SelectAllPosts().Where(u => !u.IsDeleted);
+                return this.storageBroker.SelectAllPosts();
 
             }
             catch (Exception)

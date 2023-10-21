@@ -15,9 +15,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ConfirmDialogComponent } from './core/dialog/confirm-dialog/confirm-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { UserConfirmDialogComponent } from './core/dialog/user/confirm-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, ConfirmDialogComponent],
+  declarations: [
+    AppComponent,
+    ConfirmDialogComponent,
+    UserConfirmDialogComponent,
+  ],
   imports: [
     BrowserModule,
     MatIconModule,

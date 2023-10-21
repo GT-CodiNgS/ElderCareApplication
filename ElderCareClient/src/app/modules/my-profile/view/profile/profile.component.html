@@ -4,7 +4,7 @@
       <div class="w-full md:w-3/12 md:mx-2">
         <div
           style="background-color: aliceblue"
-          class="rounded shadow-black  shadow-sm bg-white p-3 border-t-4 border-green-400 pro-sec"
+          class="rounded shadow-black shadow-sm bg-white p-3 border-t-4 border-green-400 pro-sec"
         >
           <div class="image overflow-hidden profile-img-sec">
             <img
@@ -96,7 +96,7 @@
                   {{ "email" | translate }}
                 </div>
                 <div class="px-4 py-2">
-                  <a class="text-blue-800">{{ selectedUser.email }}</a>
+                  <a class="">{{ selectedUser.email }}</a>
                 </div>
               </div>
               <div class="grid grid-cols-2">
@@ -146,38 +146,74 @@
           *ngFor="let post of filteredPosts"
           class="bg-white rounded shadow-black p-7 shadow-md"
         >
-          <h2 class="text-xl font-semibold">{{ post.title }}</h2>
-          <p>{{ post.title }}</p>
+          <div>
+            <div style="height: 220px; font-family: Playfair Display, serif">
+              <h2 style="font-size: 30px" class="font-bold">
+                {{
+                  post.title.length > 60
+                    ? post.title.slice(0, 60) + "..."
+                    : post.title
+                }}
+              </h2>
+              <p style="font-size: 20px" class="text-gray-500">
+                {{
+                  post.description.length > 100
+                    ? post.description.slice(0, 100) + "..."
+                    : post.description
+                }}
+              </p>
 
-          <div class="flex justify-between mt-3">
-            <p class="text-gray-600">{{ post.description }}</p>
-            <p class="float-right">{{ post.title }}</p>
-          </div>
-
-          <div class="btn-group mt-4 text-white font-bold rounded float-right">
-            <button
-              (click)="delete(post)"
-              mat-icon-button
-              aria-label="Example icon button with a vertical three dot icon"
+              <div class="flex justify-between mt-3">
+                <p
+                  style="font-size: 16px; font-family: Playfair Display, serif"
+                  class="text-gray-600"
+                >
+                  {{
+                    post.body.length > 700
+                      ? post.body.slice(0, 700) + "..."
+                      : post.body
+                  }}
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col float-left">
+              <p class="float-right">
+                {{
+                  post.postGenderType === PostGenderType.Male
+                    ? "MALE"
+                    : post.postGenderType === PostGenderType.Female
+                    ? "FEMALE"
+                    : "UNISEX"
+                }}
+              </p>
+            </div>
+            <div
+              class="btn-group mt-4 text-white font-bold rounded float-right"
             >
-              <mat-icon>delete</mat-icon>
-            </button>
+              <button
+                (click)="delete(post)"
+                mat-icon-button
+                aria-label="Example icon button with a vertical three dot icon"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
 
-            <button
-              (click)="edit(post)"
-              mat-icon-button
-              aria-label="Example icon button with a vertical three dot icon"
-            >
-              <mat-icon>edit</mat-icon>
-            </button>
+              <button
+                (click)="edit(post)"
+                mat-icon-button
+                aria-label="Example icon button with a vertical three dot icon"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
 
-            <button
-              (click)="view(post)"
-              mat-icon-button
-              aria-label="Example icon button with a vertical three dot icon"
-            >
-              <mat-icon>visibility</mat-icon>
-            </button>
+              <button
+                (click)="view(post)"
+                mat-icon-button
+                aria-label="Example icon button with a vertical three dot icon"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -220,40 +220,40 @@ namespace EdlerCareApi.Services.Foundations.Auth
             throw new NotImplementedException();
         }
 
-        public bool ForgotPassword()
+        public bool ForgotPassword(string email)
         {
-            UserProfile loggedUser = this.userProfileService.GetLoggedUserId().Result;
-            if (loggedUser != null)
+            IQueryable<UserProfile> userProfiles = this.userProfileService.RetriveAllActiveUserProfiles();
+
+            UserProfile maybeUserProfile =
+                userProfiles.FirstOrDefault(u => u.Email == email);
+
+            if (maybeUserProfile != null)
             {
                 string randomPassword = Guid.NewGuid().ToString().Substring(0, 8);
                 CreatePasswordHash(randomPassword, out byte[] passwordHash, out byte[] passwordSalt);
 
-                UserProfile mayBeUser = this.userProfileService.RetrieveUserProfileByIdAsync(loggedUser.Id).Result;
-                if (mayBeUser != null)
+                maybeUserProfile.PasswordHash = passwordHash;
+                maybeUserProfile.PasswordSalt = passwordSalt;
+                maybeUserProfile.UpdatedDate = DateTime.UtcNow;
+
+                ValueTask<UserProfile> updatedUserProfile
+                    = this.storageBroker.UpdateUserProfileAsync(maybeUserProfile);
+
+                if (updatedUserProfile != null)
                 {
-                    mayBeUser.PasswordHash = passwordHash;
-                    mayBeUser.PasswordSalt = passwordSalt;
-                    mayBeUser.UpdatedDate = DateTime.UtcNow;
+                    string apiUrl = _emailSettings.ApiUrl;
 
-                    ValueTask<UserProfile> updatedUserProfile
-                        = this.storageBroker.UpdateUserProfileAsync(mayBeUser);
+                    var emailBody = $"Your new password is {randomPassword}.";
 
-                    if (updatedUserProfile.IsCompletedSuccessfully)
+                    bool isEmailSent = this.emailService.SendEmailAsync(
+                         maybeUserProfile.Username,
+                         maybeUserProfile.Email,
+                         "Forgot Password",
+                         emailBody).Result;
+
+                    if (isEmailSent)
                     {
-                        string apiUrl = _emailSettings.ApiUrl;
-
-                        var emailBody = $"Your new password is {randomPassword}.";
-
-                        bool isEmailSent = this.emailService.SendEmailAsync(
-                             mayBeUser.Username,
-                             mayBeUser.Email,
-                             "Forgot Password",
-                             emailBody).Result;
-
-                        if (isEmailSent)
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                 }
             }

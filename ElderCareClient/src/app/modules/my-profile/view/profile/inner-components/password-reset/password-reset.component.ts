@@ -36,7 +36,7 @@ export class PasswordResetComponent implements OnInit {
     if (this.detailsForm.valid) {
       this.apiLoading = true;
       this.userService
-        .resetPassword(
+        .changePassword(
           new PasswordReset(
             this.localStorageService.getItem('id'),
             this.detailsForm.get('password')?.value,
