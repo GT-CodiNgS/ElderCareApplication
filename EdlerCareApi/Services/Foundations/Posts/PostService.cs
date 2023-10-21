@@ -17,6 +17,7 @@ namespace EdlerCareApi.Services.Foundations.Posts
         {
             try
             {
+                post.Id = new Guid();
                 return await this.storageBroker.InsertPostAsync(post);
 
             }
