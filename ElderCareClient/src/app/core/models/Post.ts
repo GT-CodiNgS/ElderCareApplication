@@ -1,4 +1,5 @@
 export class Post {
+  id: string;
   title: string;
   description: string;
   postGenderType: PostGenderType;
@@ -8,8 +9,22 @@ export class Post {
   updatedDate?: Date;
   createdBy?: string;
   updatedBy?: string;
+  isVerified: boolean;
 
-  constructor( title: string, description: string, postGenderType: PostGenderType, body: string, isDeleted: boolean, createdDate: Date, updatedDate: Date, createdBy: string, updatedBy: string) {
+  constructor(
+    id: string,
+    title: string,
+    description: string,
+    postGenderType: PostGenderType,
+    body: string,
+    isDeleted: boolean,
+    createdDate: Date,
+    updatedDate: Date,
+    createdBy: string,
+    updatedBy: string,
+    isVerified: boolean
+  ) {
+    this.id = id;
     this.title = title;
     this.description = description;
     this.postGenderType = postGenderType;
@@ -19,6 +34,7 @@ export class Post {
     this.updatedDate = updatedDate;
     this.createdBy = createdBy;
     this.updatedBy = updatedBy;
+    this.isVerified = isVerified;
   }
 }
 

@@ -1,0 +1,60 @@
+<div>
+  <div class="login-modal-content">
+    <div class="flex items-center justify-center">
+      <div class="">
+        <div>
+          <h2 class="mt-6 text-center text-3xl font-serif text-gray-900">
+            View Post
+          </h2>
+        </div>
+        <div class="m-10">
+          <div>
+            <div class="mb-10" style="font-family: Playfair Display, serif">
+              <h2 style="font-size: 30px" class="font-bold">
+                {{ post.title }}
+              </h2>
+              <p style="font-size: 20px" class="text-gray-500">
+                {{ post.description }}
+              </p>
+
+              <div class="flex flex-col justify-between mt-8">
+                <p class="mb-2">Description :</p>
+                <p
+                  style="font-size: 16px; font-family: Playfair Display, serif"
+                  class="text-gray-600"
+                >
+                  {{ post.body }}
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col float-left">
+              <p>For service :</p>
+              <p class="float-right ml-1">
+                {{
+                  post.postGenderType === PostGenderType.Male
+                    ? "MALE"
+                    : post.postGenderType === PostGenderType.Female
+                    ? "FEMALE"
+                    : "UNISEX"
+                }}
+              </p>
+              <!-- <p>{{ post. }}</p> -->
+            </div>
+            <div class="flex flex-col float-right">
+              <p class="float-right">
+                {{ post.createdDate | date : "dd-MM-yyyy" }}
+              </p>
+              <!-- <button
+              style="background-color: cornflowerblue"
+              (click)="viewPost(post)"
+              class="mt-4 rounded-3xl hover:bg-green-700 text-white py-2 px-4 rounded float-right"
+            >
+              Read more
+            </button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

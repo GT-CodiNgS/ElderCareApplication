@@ -1,0 +1,9 @@
+<div class="dialog">
+  <h1 mat-dialog-title>{{data.title}}</h1>
+  <div mat-dialog-content>{{data.message}}</div>
+  <div class="btn-group" mat-dialog-actions>
+    <button (click)="btnClose()" mat-raised-button color="primary">Close</button>
+    <button (click)="bntYes()" mat-raised-button color="warn">Yes</button>
+  </div>
+</div>
+

@@ -1,61 +1,131 @@
-<div class="bg-blue-950 p-4 fixed top-0 w-full z-10">
+<div style="background-color: #133f59" class="p-4 fixed top-0 w-full z-10">
   <nav class="flex items-center justify-between">
-    <div class="text-white text-2xl font-semibold">ELDER CARE</div>
+    <div class="text-white text-2xl font-semibold flex ml-4">
+      ELDER CARE
+      <img class="ml-3" src="../../../assets/img/elder_nav_icon.png" alt="" />
+    </div>
     <ul class="flex space-x-4 pr-8">
-      <li><a [routerLink]="'..'" class="text-white">Home</a></li>
+      <li>
+        <a [routerLink]="'..'" class="text-white">{{ "home" | translate }}</a>
+      </li>
       <li>
         <a (click)="navigateToProfile()" class="text-white cursor-pointer"
-        >Profile</a
+          >{{ "profile" | translate }}
+        </a>
+      </li>
+
+      <li *ngIf="localStorage.getItem('roleType') == '1'">
+        <a
+          [routerLink]="'admin-panel'"
+          (click)="navigateToAdminPanel()"
+          class="text-white cursor-pointer"
+          >{{ "aminpanel" | translate }}</a
         >
       </li>
       <li *ngIf="localStorage.getItem('token')" class="ml-2">
         <a
           disabled
           (click)="logout()"
-          class="text-black font-mono pr-3 pl-3 p-1 rounded-sm text-center cursor-pointer bg-orange-600"
-        >Logout</a>
+          class="text-orange-500 pr-3 pl-3 p-1 rounded-sm text-center cursor-pointer"
+          >{{ "logout" | translate }}</a
+        >
       </li>
-
+      <li>
+        <div>
+          <select [(ngModel)]="selectedLanguage" (change)="changeLanguage()">
+            <option value="en">English</option>
+            <option value="sl">සිංහල</option>
+            <option value="tl">தமிழ்</option>
+          </select>
+        </div>
+      </li>
     </ul>
   </nav>
+</div>
+<div style="margin-top: 65px; height: 3px">
+  <mat-progress-bar
+    class="custom-speed-progress-bar"
+    mode="indeterminate"
+    *ngIf="isLoading$ | async"
+    color="warn"
+  ></mat-progress-bar>
 </div>
 
 <mat-drawer-container class="drawer-container">
   <mat-drawer class="side-bar" mode="side" opened>
-    <div class="col-span-1 bg-gray-50 rounded shadow-sm">
-      <img src="../../../../../assets/home/nav-bar-img.png" alt="">
-      <h2 class="welcome-text">Hi, Welcome</h2>
+    <div
+      *ngIf="
+        router.url !== '/hero/admin-panel' &&
+        router.url !== '/hero/admin-panel/post' &&
+        router.url !== '/hero/admin-panel/user'
+      "
+      class="col-span-1"
+    >
+      <img src="../../../../../assets/home/nav-bar-img.png" alt="" />
+      <h2
+        style="font-family: Playfair Display, serif"
+        class="welcome-text"
+        [ngClass]="currentLanguage"
+      >
+        {{ "welcome" | translate }}
+      </h2>
       <div class="m-5">
         <div class="mb-10">
-          <h1 class="text-lg text-black mb-2">About Us</h1>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years.
-          </p>
-        </div>
-        <div *ngIf="router.url == '/url'" class="filters-checks">
-          <h3>Filter By</h3>
-          <div class="form-check m-3">
-            <input type="checkbox" class="form-check-input" id="priceLowest" />
-            <label class="form-check-label" for="priceLowest">PriceLowest</label>
-          </div>
-          <div class="form-check m-3">
-            <input type="checkbox" class="form-check-input" id="fullTime" />
-            <label class="form-check-label" for="fullTime">FullTime</label>
-          </div>
-          <div class="form-check m-3">
-            <input type="checkbox" class="form-check-input" id="partTime" />
-            <label class="form-check-label" for="partTime">Part time</label>
-          </div>
-          <div class="form-check m-3">
-            <input type="checkbox" class="form-check-input" id="location" />
-            <label class="form-check-label" for="location">Location</label>
-          </div>
+          <h1
+            style="font-family: Playfair Display, serif"
+            class="text-lg text-black mb-2"
+          >
+            {{ "about" | translate }}
+          </h1>
+          <span
+            style="
+              font-family: Playfair Display, serif;
+              color: black !important;
+            "
+            class="text-left"
+          >
+            {{ "abouttext" | translate }}
+          </span>
+          <h1 class="text-lg text-black mb-2"></h1>
+          <p></p>
         </div>
       </div>
+    </div>
+
+    <div
+      *ngIf="
+        router.url.concat('admin-panel') &&
+        router.url !== '/hero' &&
+        router.url !== '/hero/my-profile'
+      "
+      class="menu mt-8"
+    >
+      <button
+        routerLinkActive="active-route"
+        [ngClass]="{ 'active-route': isPostActive }"
+        [routerLink]="'/hero/admin-panel/post'"
+        mat-raised-button
+      >
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Example home icon"
+          fontIcon="pages"
+        ></mat-icon>
+        Post
+      </button>
+      <button
+        routerLinkActive="active-route"
+        [routerLink]="'/hero/admin-panel/user'"
+        mat-raised-button
+      >
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Example home icon"
+          fontIcon="people_alt"
+        ></mat-icon>
+        User
+      </button>
     </div>
   </mat-drawer>
   <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>
 </mat-drawer-container>
-

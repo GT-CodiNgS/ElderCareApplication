@@ -24,8 +24,16 @@ namespace EdlerCareApi.Controllers
             return Created(addedPost);
         }
 
-        [HttpGet]
+        [HttpGet,AllowAnonymous]
         public ActionResult<IQueryable<Post>> GetAllPosts()
+        {
+            IQueryable<Post> posts = this.postService.RetriveAllActivePosts()
+                .Where(u => !u.IsDeleted && u.IsVerified);
+            return Ok(posts);
+        }
+
+        [HttpGet("admin")]
+        public ActionResult<IQueryable<Post>> GetAllPostsForAmin()
         {
             IQueryable<Post> posts = this.postService.RetriveAllActivePosts();
             return Ok(posts);
@@ -38,10 +46,17 @@ namespace EdlerCareApi.Controllers
             return Ok(post);
         }
 
-        [HttpPut("{postId}")]
+        [HttpPut]
         public async ValueTask<ActionResult<Post>> ModifyPostAsync(Post post)
         {
             Post modifiedPost = await this.postService.ModifyPostAsync(post);
+            return Ok(modifiedPost);
+        }
+
+        [HttpPut("verify/{postId}")]
+        public async ValueTask<ActionResult<Post>> ModifyPostToVerifyAsync(Guid postId)
+        {
+            Post modifiedPost = await this.postService.VerifyPostAsync(postId);
             return Ok(modifiedPost);
         }
 
@@ -50,6 +65,13 @@ namespace EdlerCareApi.Controllers
         {
             Post removedPost = await this.postService.RemovePostAsync(postId);
             return Ok(removedPost);
+        }
+
+        [HttpGet("user/{userId}")]
+        public ActionResult<IQueryable<Post>> GetAllPostsByUserId(Guid userId)
+        {
+            IQueryable<Post> posts = this.postService.RetriveAllActivePostsByUserId(userId);
+            return Ok(posts);
         }
     }
 }

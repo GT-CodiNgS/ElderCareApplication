@@ -28,12 +28,20 @@ namespace EdlerCareApi.Services.Foundations.Users
             }
         }
 
-        public async ValueTask<UserProfile> ModifyUserProfileAsync(UserProfile user)
+        public async ValueTask<UserProfile> ModifyUserProfileAsync(UserProfile userProfile)
         {
             try
             {
-                return await this.storageBroker.UpdateUserProfileAsync(user);
-
+                UserProfile mayBeUserProfile =
+                await this.storageBroker.SelectUserProfileByIdAsync(userProfile.Id);
+                if (mayBeUserProfile == null)
+                {
+                    throw new UserNotFoundException();
+                }
+                userProfile.CreatedDate = mayBeUserProfile.CreatedDate;
+                userProfile.CreatedBy = mayBeUserProfile.CreatedBy;
+                userProfile.UpdatedDate = DateTime.UtcNow;
+                return await this.storageBroker.UpdateUserProfileAsync(userProfile);
             }
             catch (Exception)
             {

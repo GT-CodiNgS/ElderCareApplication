@@ -71,15 +71,32 @@ namespace EdlerCareApi.Controllers
         }
 
         [HttpPost("change-password")]
-        public async ValueTask<ActionResult<string>> ForgotPassword([FromBody] PasswordResetDto passwordResetDto)
+        public async ValueTask<ActionResult<string>> ChangePassword([FromBody] PasswordResetDto passwordResetDto)
         {
             try
             {
-                bool isReseted = this.authService.IsPasswordReset(passwordResetDto);
+                bool isReseted = this.authService.PasswordChange(passwordResetDto);
                 var refreshToken = GenerateRefreshToken();
                 SetRefreshToken(refreshToken);
 
                 return Ok(isReseted);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        [HttpGet("forgot-password/{email}"), AllowAnonymous]
+        public async ValueTask<ActionResult<bool>> ForgotPassword(string email)
+        {
+            try
+            {
+                bool isEmailSent = this.authService.ForgotPassword(email);
+                var refreshToken = GenerateRefreshToken();
+                SetRefreshToken(refreshToken);
+
+                return Ok(isEmailSent);
             }
             catch (Exception e)
             {

@@ -1,0 +1,189 @@
+<div style="height: -webkit-fill-available" class="flex flex-col h-fit m-8">
+  <div style="height: 10%; float: inline-end !important" class="float-right">
+    <div class="float-left">
+      <mat-checkbox
+        (change)="onCheckboxChange($event)"
+        class="example-margin custom-green-checkbox"
+        >Approval pending</mat-checkbox
+      >
+    </div>
+    <div class="flex flex-row-reverse">
+      <div style="width: 50%" class="search-container mr-4 ml-4">
+        <input
+          (input)="searchPosts(searchInput.value)"
+          #searchInput
+          type="text"
+          class="rounded-md border search-input w-full"
+          placeholder="search here..."
+        />
+        <button class="search-button">SEARCH</button>
+      </div>
+    </div>
+  </div>
+  <div style="height: 90%" class="">
+    <div class="">
+      <div class="table-container">
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          matSort
+          (matSortChange)="announceSortChange($event)"
+          class="mat-elevation-z8"
+        >
+          <!-- Ellipsis Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button [matMenuTriggerFor]="menu">...</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="viewRow(row)">View</button>
+                <button mat-menu-item (click)="verifyOnClick(row)">
+                  Verify
+                </button>
+                <button mat-menu-item (click)="deleteRow(row)">Delete</button>
+              </mat-menu>
+            </td>
+          </ng-container>
+          <!-- Position Column -->
+          <ng-container matColumnDef="title">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by title"
+            >
+              Title
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{
+                element.title.length > 35
+                  ? (element.title | slice : 0 : 35) + "..."
+                  : element.title
+              }}
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="createdby">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by createdby"
+            >
+              Created By
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.createdByName.firstName }}
+            </td>
+          </ng-container>
+
+          <!-- createdDate Column -->
+          <ng-container matColumnDef="createdDate">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by createdDate"
+            >
+              Created Date
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.createdDate | date : "dd-MM-yyyy" }}
+            </td>
+          </ng-container>
+
+          <!-- postGenderType Column -->
+          <ng-container matColumnDef="postGenderType">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by postGenderType"
+            >
+              PostGenderType
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ getGenderText(element.postGenderType) }}
+            </td>
+          </ng-container>
+
+          <!-- Verified Column -->
+          <ng-container matColumnDef="city">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by city"
+            >
+              City
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.createdByName.city }}
+            </td>
+          </ng-container>
+
+          <!-- Verified Column -->
+          <ng-container matColumnDef="delete">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by delete"
+            >
+              Status
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-chip
+                class="w-20 align-middle justify-center"
+                [ngClass]="{
+                  'bg-success-delete': !element.isDeleted,
+                  'bg-danger-delete': element.isDeleted
+                }"
+                [attr.aria-label]="element.isVerified ? 'Removed' : 'Active'"
+              >
+                {{ element.isDeleted ? "Removed" : "Active" }}
+              </mat-chip>
+            </td>
+          </ng-container>
+
+          <!-- Verified Column -->
+          <ng-container matColumnDef="verified">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by verified"
+            >
+              Verified
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-chip
+                style="width: 92px"
+                class="text-center justify-center"
+                [ngClass]="{
+                  'bg-success': element.isVerified,
+                  'bg-danger': !element.isVerified
+                }"
+                [attr.aria-label]="
+                  element.isVerified ? 'Verified' : 'Not Verified'
+                "
+              >
+                {{ element.isVerified ? "Verified" : "Not Verified" }}
+              </mat-chip>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+      <mat-paginator
+        [pageSizeOptions]="[10, 20, 100]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>

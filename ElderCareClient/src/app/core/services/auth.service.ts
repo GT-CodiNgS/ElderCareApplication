@@ -13,16 +13,12 @@ export class AuthService {
   private apiUrl = environment.baseUrl;
 
   constructor(
-    private config: SettingsService,
     private http: HttpClient,
-    private localStorage: LocalStorageService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   login(user: UserProfile) {
-    console.log(this.apiUrl);
-
     return this.http.post(`${this.apiUrl}login`, user);
   }
 

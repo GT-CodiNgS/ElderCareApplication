@@ -10,6 +10,7 @@ namespace EdlerCareApi.Services.Foundations.Auth
         UserProfile LoginUserAsync(UserDto user);
         ValueTask<UserDto> LogoutUserAsync(UserDto user);
         ValueTask<UserDto> RefreshTokenAsync(UserDto user);
-        bool IsPasswordReset(PasswordResetDto passwordResetDto);
+        bool PasswordChange(PasswordResetDto passwordResetDto);
+        bool ForgotPassword(string email);
     }
 }

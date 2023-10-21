@@ -1,5 +1,5 @@
 <div class="model">
-  <div class="login-modal-content" style="max-height: 80vh;">
+  <div class="login-modal-content" style="max-height: 80vh">
     <div class="flex items-center justify-center bg-gray-100">
       <div class="w-96 space-y-4">
         <div>
@@ -17,10 +17,11 @@
                   formControlName="firstName"
                   type="text"
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="User Name"
+                  placeholder="First Name"
                 />
-                <mat-error *ngIf="checkError('firstName', 'required')">Required</mat-error>
-
+                <mat-error *ngIf="checkError('firstName', 'required')"
+                  >First name required</mat-error
+                >
               </div>
 
               <div class="pb-3">
@@ -32,8 +33,9 @@
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Last Name"
                 />
-                <mat-error *ngIf="checkError('lastName', 'required')">Required</mat-error>
-
+                <mat-error *ngIf="checkError('lastName', 'required')"
+                  >Last name required</mat-error
+                >
               </div>
             </div>
 
@@ -47,8 +49,9 @@
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Email"
                 />
-                <mat-error *ngIf="checkError('email', 'required')">Required</mat-error>
-
+                <mat-error *ngIf="checkError('email', 'required')"
+                  >Email required</mat-error
+                >
               </div>
 
               <div class="pb-3">
@@ -60,14 +63,13 @@
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="phone"
                 />
-                <mat-error *ngIf="checkError('phone', 'required')">Required</mat-error>
-
+                <mat-error *ngIf="checkError('phone', 'required')"
+                  >Contact required</mat-error
+                >
               </div>
             </div>
 
             <div class="row-form">
-
-
               <div class="pb-3">
                 <label for="address" class="sr-only">Address</label>
                 <input
@@ -77,8 +79,9 @@
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Address"
                 />
-                <mat-error *ngIf="checkError('address', 'required')">Required</mat-error>
-
+                <mat-error *ngIf="checkError('address', 'required')"
+                  >Address required</mat-error
+                >
               </div>
 
               <div class="pb-3">
@@ -90,14 +93,13 @@
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="City"
                 />
-                <mat-error *ngIf="checkError('city', 'required')">Required</mat-error>
-
+                <mat-error *ngIf="checkError('city', 'required')"
+                  >City required</mat-error
+                >
               </div>
             </div>
 
             <div class="row-form">
-
-
               <div class="pb-3">
                 <label for="username" class="sr-only">User Name</label>
                 <input
@@ -107,27 +109,24 @@
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="User name"
                 />
-                <mat-error *ngIf="checkError('username', 'required')">Required</mat-error>
-
+                <mat-error *ngIf="checkError('username', 'required')"
+                  >Username required</mat-error
+                >
               </div>
-
             </div>
 
             <div>
               <button
                 (click)="updateProfile()"
                 type="submit"
-                class=" group relative w-full flex justify-center my-6 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="group relative w-full flex justify-center my-6 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Update
               </button>
             </div>
           </form>
         </div>
-
-
       </div>
     </div>
   </div>
 </div>
-
