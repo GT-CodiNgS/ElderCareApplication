@@ -45,7 +45,8 @@ namespace EdlerCareApi.Services.Foundations.Auth
                 IQueryable<UserProfile> userProfiles = this.userProfileService.RetriveAllActiveUserProfiles();
 
                 UserProfile maybeUserProfile =
-                    userProfiles.FirstOrDefault(u => u.Username == user.Username);
+                    userProfiles.FirstOrDefault(u => 
+                    u.Username == user.Username && !u.IsDeleted && u.IsVerfied);
 
                 if (maybeUserProfile is null)
                 {

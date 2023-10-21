@@ -51,9 +51,16 @@
               <button
                 style="background-color: darkgray"
                 (click)="openEditProfileDialog()"
-                class="rounded shadow-black shadow-sm uppercase text-white font-bold hover:opacity-60 text-xs px-4 py-2 outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                class="items-center rounded shadow-black shadow-sm uppercase text-white font-bold hover:opacity-60 text-xs px-4 py-2 outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                 type="button"
               >
+                <!-- <mat-icon
+                  style="display: contents !important"
+                  class=""
+                  aria-hidden="false"
+                  aria-label="Example home icon"
+                  fontIcon="edit"
+                ></mat-icon> -->
                 {{ "edit" | translate }}
               </button>
               <button
@@ -61,6 +68,11 @@
                 class="bg-cyan-800 uppercase text-white font-bold rounded shadow-black shadow-sm hover:opacity-60 text-xs px-4 py-2 outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                 type="button"
               >
+                <!-- <mat-icon
+                  aria-hidden="false"
+                  aria-label="Example home icon"
+                  fontIcon="password"
+                ></mat-icon> -->
                 {{ "resetpassword" | translate }}
               </button>
             </div>

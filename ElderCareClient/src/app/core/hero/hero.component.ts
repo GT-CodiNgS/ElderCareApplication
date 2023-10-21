@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from '../../modules/login/login.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { LocalStorageService } from '../services/local-storage.service';
 import { Observable, delay, of, switchMap } from 'rxjs';
 import { LoadingService } from '../services/loading.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-hero',
@@ -19,6 +20,7 @@ export class HeroComponent implements OnInit {
   isLoading$!: Observable<boolean>;
   selectedLanguage!: string;
   currentLanguage!: string;
+  isPostActive: boolean = true;
 
   constructor(
     public dialog: MatDialog,
@@ -26,11 +28,23 @@ export class HeroComponent implements OnInit {
     public router: Router,
     public localStorage: LocalStorageService,
     private loadingService: LoadingService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private activatedRoute: ActivatedRoute,
+    private cdRef: ChangeDetectorRef
   ) {
     this.isLoading$ = this.loadingService.loading$;
     this.selectedLanguage = localStorage.getLangItem('language') || 'en';
     this.translate.use(this.selectedLanguage);
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        console.log(this.activatedRoute.firstChild?.snapshot.url[0]?.path);
+
+        this.isPostActive =
+          this.activatedRoute.firstChild?.snapshot.url[0]?.path !== 'user';
+
+        this.cdRef.detectChanges();
+      }
+    });
   }
 
   ngOnInit() {

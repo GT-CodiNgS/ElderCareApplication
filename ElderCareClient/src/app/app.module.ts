@@ -36,6 +36,7 @@ import { UserConfirmDialogComponent } from './core/dialog/user/confirm-dialog.co
     AppRoutingModule,
     MatProgressBarModule,
     MatButtonModule,
+    MatIconModule,
   ],
   providers: [
     {

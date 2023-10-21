@@ -123,16 +123,16 @@ export class LoginComponent implements OnInit {
     if (this.signupForm.valid) {
       this.authService.register(this.signupForm.value).subscribe(
         async (response) => {
-          this.disableLoginBtn = true;
-          this.userData = response;
-          this.localStorageService.setItem('token', this.userData.result.token);
-          this.localStorageService.setItem('id', this.userData.result.id);
+          // this.disableLoginBtn = true;
+          // this.userData = response;
+          // this.localStorageService.setItem('token', this.userData.result.token);
+          // this.localStorageService.setItem('id', this.userData.result.id);
           this.snackbarService.openCustomSnackBar(
             'Registration Successful',
             'success',
             'primary'
           );
-          this.apiLoading = false;
+          // this.apiLoading = false;
           this.closeDialog();
         },
 

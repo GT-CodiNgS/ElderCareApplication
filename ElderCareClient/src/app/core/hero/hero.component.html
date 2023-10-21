@@ -89,27 +89,6 @@
           <h1 class="text-lg text-black mb-2"></h1>
           <p></p>
         </div>
-        <!-- <div *ngIf="router.url == '/url'" class="filters-checks">
-          <h3>Filter By</h3>
-          <div class="form-check m-3">
-            <input type="checkbox" class="form-check-input" id="priceLowest" />
-            <label class="form-check-label" for="priceLowest"
-              >PriceLowest</label
-            >
-          </div>
-          <div class="form-check m-3">
-            <input type="checkbox" class="form-check-input" id="fullTime" />
-            <label class="form-check-label" for="fullTime">FullTime</label>
-          </div>
-          <div class="form-check m-3">
-            <input type="checkbox" class="form-check-input" id="partTime" />
-            <label class="form-check-label" for="partTime">Part time</label>
-          </div>
-          <div class="form-check m-3">
-            <input type="checkbox" class="form-check-input" id="location" />
-            <label class="form-check-label" for="location">Location</label>
-          </div>
-        </div> -->
       </div>
     </div>
 
@@ -121,10 +100,29 @@
       "
       class="menu mt-8"
     >
-      <button [routerLink]="'/hero/admin-panel/post'" mat-raised-button>
+      <button
+        routerLinkActive="active-route"
+        [ngClass]="{ 'active-route': isPostActive }"
+        [routerLink]="'/hero/admin-panel/post'"
+        mat-raised-button
+      >
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Example home icon"
+          fontIcon="pages"
+        ></mat-icon>
         Post
       </button>
-      <button [routerLink]="'/hero/admin-panel/user'" mat-raised-button>
+      <button
+        routerLinkActive="active-route"
+        [routerLink]="'/hero/admin-panel/user'"
+        mat-raised-button
+      >
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Example home icon"
+          fontIcon="people_alt"
+        ></mat-icon>
         User
       </button>
     </div>
