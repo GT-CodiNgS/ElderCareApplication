@@ -43,7 +43,7 @@ namespace EdlerCareApi.Services.Foundations.Users
                 userProfile.CreatedBy = mayBeUserProfile.CreatedBy;
                 userProfile.UpdatedDate = DateTime.UtcNow;
                 userProfile.IsDeleted = false;
-                userProfile.IsEmailSent = mayBeUserProfile.IsEmailSent;
+                userProfile.IsEmailSent = true;
                 userProfile.IsVerfied = mayBeUserProfile.IsVerfied;
                 userProfile.PasswordHash = mayBeUserProfile.PasswordHash;
                 userProfile.PasswordSalt = mayBeUserProfile.PasswordSalt;
