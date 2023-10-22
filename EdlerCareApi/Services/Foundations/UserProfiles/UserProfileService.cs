@@ -42,6 +42,7 @@ namespace EdlerCareApi.Services.Foundations.Users
                 userProfile.CreatedBy = mayBeUserProfile.CreatedBy;
                 userProfile.UpdatedDate = DateTime.UtcNow;
                 userProfile.IsDeleted = false;
+                userProfile.IsEmailSent = mayBeUserProfile.IsEmailSent;
                 userProfile.IsVerfied = mayBeUserProfile.IsVerfied;
                 return await this.storageBroker.UpdateUserProfileAsync(userProfile);
             }
