@@ -38,13 +38,40 @@ namespace EdlerCareApi.Services.Foundations.Users
                 {
                     throw new UserNotFoundException();
                 }
+
                 userProfile.CreatedDate = mayBeUserProfile.CreatedDate;
                 userProfile.CreatedBy = mayBeUserProfile.CreatedBy;
                 userProfile.UpdatedDate = DateTime.UtcNow;
                 userProfile.IsDeleted = false;
                 userProfile.IsEmailSent = mayBeUserProfile.IsEmailSent;
                 userProfile.IsVerfied = mayBeUserProfile.IsVerfied;
+                userProfile.PasswordHash = mayBeUserProfile.PasswordHash;
+                userProfile.PasswordSalt = mayBeUserProfile.PasswordSalt;
+                userProfile.TokenCreated = mayBeUserProfile.TokenCreated;
+
+
                 return await this.storageBroker.UpdateUserProfileAsync(userProfile);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async ValueTask<UserProfile> ModifyUserProfileAfterEmailConfirmAsync(UserProfile userProfile)
+        {
+            try
+            {
+                UserProfile mayBeUserProfile =
+                await this.storageBroker.SelectUserProfileByIdAsync(userProfile.Id);
+                if (mayBeUserProfile == null)
+                {
+                    throw new UserNotFoundException();
+                }
+                mayBeUserProfile.IsVerfied = true;
+
+                return await this.storageBroker.UpdateUserProfileAsync(mayBeUserProfile);
             }
             catch (Exception)
             {

@@ -11,5 +11,6 @@ namespace EdlerCareApi.Services.Foundations.Users
         IQueryable<UserProfile> RetriveAllActiveUserProfiles();
         string GetMyName();
         ValueTask<UserProfile> GetLoggedUserId();
+        ValueTask<UserProfile> ModifyUserProfileAfterEmailConfirmAsync(UserProfile userProfile);
     }
 }

@@ -114,7 +114,7 @@ namespace EdlerCareApi.Controllers
                 return BadRequest("Invalid token");
 
             userProfile.IsVerfied = true;
-            await this.userService.ModifyUserProfileAsync(userProfile);
+            await this.userService.ModifyUserProfileAfterEmailConfirmAsync(userProfile);
 
             var htmlContent = @"
             <html>
