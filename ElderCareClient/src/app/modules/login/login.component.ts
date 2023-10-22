@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       lastName: ['', Validators.required],
       userName: ['', Validators.required],
       email: ['', [Validators.required]],
-      mobile: ['', Validators.required],
+      phone: ['', Validators.required],
       address: ['', Validators.required],
       city: ['', Validators.required],
       password: ['', Validators.required],
