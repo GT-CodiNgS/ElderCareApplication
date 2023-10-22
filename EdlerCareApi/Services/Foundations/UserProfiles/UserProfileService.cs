@@ -42,7 +42,7 @@ namespace EdlerCareApi.Services.Foundations.Users
                 userProfile.CreatedBy = mayBeUserProfile.CreatedBy;
                 userProfile.UpdatedDate = DateTime.UtcNow;
                 userProfile.IsDeleted = false;
-                userProfile.IsVerfied = true;
+                userProfile.IsVerfied = mayBeUserProfile.IsVerfied;
                 return await this.storageBroker.UpdateUserProfileAsync(userProfile);
             }
             catch (Exception)
